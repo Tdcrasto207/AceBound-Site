@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AceBound — Seller Origination for Boutique M&A Advisors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1f3c; --navy-mid: #132848; --white: #ffffff; --off-white: #f7f6f3;
+      --muted: #6b7280; --rule: #e5e2da; --accent: #c8a96e;
+    }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--navy); }
+    .hero { background: var(--navy); color: var(--white); padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+    .hero-nav { padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+    .wordmark { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; color: #fff; text-decoration:none; }
+    .hero-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+    .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+    .hero-headline { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 2rem; }
+    .hero-headline em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 1.0625rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.75); max-width: 460px; margin: 0 auto 2.5rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: var(--navy); padding: 0.9rem 1.6rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+    .btn-secondary { background: transparent; color: #fff; padding: 0.9rem 1.6rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); }
+    .section { padding: 6rem 4rem; max-width: 860px; margin: 0 auto; }
+    .section + .section { border-top: 1px solid var(--rule); }
+    .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
+    .section-headline { font-family: 'DM Serif Display', serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.2; letter-spacing: -0.015em; color: var(--navy); margin-bottom: 2rem; }
+    .body-text { font-size: 1.0625rem; font-weight: 300; line-height: 1.78; color: #374151; max-width: 620px; }
+    .body-text p + p { margin-top: 1.5rem; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; margin-top: 3rem; }
+    .stat-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--navy); }
+    .footer { background: var(--navy); color: var(--white); padding: 4rem; display: flex; flex-direction: column; gap: 1rem; }
+    .footer-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .footer-email { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; color: var(--white); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); display: inline-block; padding-bottom: 0.25rem; transition: border-color 0.2s; }
+    .footer-note { margin-top: 2rem; font-size: 0.8125rem; font-weight: 300; color: rgba(255,255,255,0.3); }
+    .footer-note a { color: rgba(255,255,255,0.5); text-decoration: underline; }
+    @media (max-width: 640px){ .section, .hero-nav, .footer { padding-left: 1.5rem; padding-right: 1.5rem; } .stat-grid{ grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <nav class="hero-nav">
+      <a href="/" class="wordmark">AceBound</a>
+    </nav>
+    <div class="hero-body">
+      <p class="eyebrow">Seller Origination · Home Services M&amp;A</p>
+      <h1 class="hero-headline">Qualified seller meetings,<br />booked <em>directly</em><br />to your calendar.</h1>
+      <p class="hero-sub">Boutique M&amp;A advisors in HVAC, plumbing, electrical, and adjacent home-service verticals — we source the seller conversations you don't have time to find.</p>
+      <div class="hero-cta">
+        <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="btn-primary">Book an intro call &rarr;</a>
+        <a href="mailto:trevorc@aceboundagency.com" class="btn-secondary">Email us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">What we do</p>
+    <h2 class="section-headline">We close the seller-side gap.</h2>
+    <div class="body-text">
+      <p>Boutique M&amp;A firms in home services have the buyer side handled. What's harder is consistent seller flow. AceBound closes that gap.</p>
+      <p>We run direct outreach to qualifying owners — typically $3–15M revenue, 50+, with a real exit trigger — qualify every prospect against your specific buy-box, and only the meetings that fit ever reach your calendar.</p>
+      <p>Each engagement is exclusive. We work with a small number of firms at a time, and the seller relationships we open belong to you alone.</p>
+    </div>
+    <div class="stat-grid">
+      <div><p class="stat-label">Revenue</p><p class="stat-value">$3M – $15M qualifying range</p></div>
+      <div><p class="stat-label">Owner profile</p><p class="stat-value">50+, real exit trigger present</p></div>
+      <div><p class="stat-label">Fit</p><p class="stat-value">Matched to your buy-box only</p></div>
+      <div><p class="stat-label">Exclusivity</p><p class="stat-value">One firm per market</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Who it's for</p>
+    <h2 class="section-headline">Built for the firms where pipeline is the constraint.</h2>
+    <div class="body-text">
+      <p>Built for boutique advisory firms in HVAC, plumbing, electrical, mechanical, and adjacent home-service verticals — typically 2–10 person shops whose constraint is seller-side pipeline, not buyer relationships.</p>
+      <p>If you have the process, the buyers, and the closing capability — but the funnel runs dry between deals — that's exactly the problem we're built to solve.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer-label">Get in touch</p>
+    <a href="mailto:trevorc@aceboundagency.com" class="footer-email">trevorc@aceboundagency.com</a>
+    <a href="tel:2679054650" class="footer-email">267-905-4650</a>
+    <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="footer-email">Book an intro call &rarr;</a>
+    <p class="footer-note">© 2026 AceBound. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Word / Office temp + working files (not part of the website)
+*.docx
+*.doc
+~$*
+
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
