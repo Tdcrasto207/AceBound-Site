@@ -443,8 +443,7 @@
     /* Two identical tracks, so shifting by half the strip loops seamlessly */
     @keyframes mqRoll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .js .marquee { animation: mqRoll 55s linear infinite; will-change: transform; }
-    /* Held still while hovered so a category can actually be clicked */
-    .js .marquee:hover { animation-play-state: paused; }
+
     .mq-track {
       display: flex; align-items: center; list-style: none;
       flex-shrink: 0; margin: 0; padding: 0;
