@@ -3,93 +3,674 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AceBound — Seller Origination for Boutique M&A Advisors</title>
+  <title>AceBound | Seller Origination for Boutique M&A Firms</title>
+  <meta name="description" content="Building a predictable pipeline of business owners considering an exit. Without hiring more BD staff, relying on referrals, or paying success fees." />
+  <script>document.documentElement.className += " js";</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #0d1f3c; --navy-mid: #132848; --white: #ffffff; --off-white: #f7f6f3;
-      --muted: #6b7280; --rule: #e5e2da; --accent: #c8a96e;
+      --navy: #0d1f3c;
+      --navy-deep: #07152c;
+      --navy-mid: #132848;
+      --navy-soft: #1b3255;
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --muted: #6b7280;
+      --body: #3d4756;
+      --rule: #e5e2da;
+      --accent: #c8a96e;
+      --accent-lt: #e2cb9c;
+      --accent-dim: #a98d55;
+      --maxw: 1120px;
+      --shadow-sm: 0 1px 2px rgba(13,31,60,0.04), 0 4px 16px rgba(13,31,60,0.05);
+      --shadow-md: 0 2px 4px rgba(13,31,60,0.05), 0 12px 32px rgba(13,31,60,0.09);
     }
-    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--navy); }
-    .hero { background: var(--navy); color: var(--white); padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
-    .hero-nav { padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; }
-    .wordmark { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; color: #fff; text-decoration:none; }
-    .hero-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
-    .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
-    .hero-headline { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 2rem; }
-    .hero-headline em { font-style: italic; color: var(--accent); }
-    .hero-sub { font-size: 1.0625rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.75); max-width: 460px; margin: 0 auto 2.5rem; }
-    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { background: var(--accent); color: var(--navy); padding: 0.9rem 1.6rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
-    .btn-secondary { background: transparent; color: #fff; padding: 0.9rem 1.6rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); }
-    .section { padding: 6rem 4rem; max-width: 860px; margin: 0 auto; }
-    .section + .section { border-top: 1px solid var(--rule); }
-    .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; }
-    .section-headline { font-family: 'DM Serif Display', serif; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.2; letter-spacing: -0.015em; color: var(--navy); margin-bottom: 2rem; }
-    .body-text { font-size: 1.0625rem; font-weight: 300; line-height: 1.78; color: #374151; max-width: 620px; }
-    .body-text p + p { margin-top: 1.5rem; }
-    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; margin-top: 3rem; }
-    .stat-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-    .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--navy); }
-    .footer { background: var(--navy); color: var(--white); padding: 4rem; display: flex; flex-direction: column; gap: 1rem; }
-    .footer-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
-    .footer-email { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; color: var(--white); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); display: inline-block; padding-bottom: 0.25rem; transition: border-color 0.2s; }
-    .footer-note { margin-top: 2rem; font-size: 0.8125rem; font-weight: 300; color: rgba(255,255,255,0.3); }
-    .footer-note a { color: rgba(255,255,255,0.5); text-decoration: underline; }
-    @media (max-width: 640px){ .section, .hero-nav, .footer { padding-left: 1.5rem; padding-right: 1.5rem; } .stat-grid{ grid-template-columns: 1fr; } }
-</style>
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--off-white); color: var(--navy);
+      line-height: 1.6; text-align: center;
+    }
+    a { color: inherit; }
+    ::selection { background: var(--accent); color: var(--navy); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+
+    /* ---------- Reveal on scroll (only when JS is running) ---------- */
+    .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.875rem; font-weight: 600; text-decoration: none;
+      padding: 0.75rem 1.35rem; border-radius: 2px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-gold { background: var(--accent); color: var(--navy); border: 1px solid var(--accent); }
+    .btn-gold:hover { background: var(--accent-lt); border-color: var(--accent-lt); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(200,169,110,0.28); }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-lg { padding: 1rem 1.9rem; font-size: 0.9375rem; }
+    .btn .arw { transition: transform 0.2s; }
+    .btn:hover .arw { transform: translateX(4px); }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(8,21,44,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1rem 2rem; max-width: var(--maxw); margin: 0 auto; }
+    .wordmark { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.55rem; }
+    .wordmark .mark { width: 9px; height: 9px; background: var(--accent); transform: rotate(45deg); display: inline-block; }
+    .nav { display: flex; align-items: center; gap: 2.25rem; }
+    .nav a { font-size: 0.875rem; color: rgba(255,255,255,0.7); text-decoration: none; position: relative; transition: color 0.2s; }
+    .nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+    .nav a:hover { color: #fff; }
+    .nav a:hover::after { width: 100%; }
+
+    /* ---------- Eyebrow ---------- */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .eyebrow::before, .eyebrow::after { content: ""; width: 24px; height: 1px; background: rgba(200,169,110,0.55); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: radial-gradient(ellipse 900px 520px at 50% 12%, #17325c 0%, var(--navy) 45%, var(--navy-deep) 100%);
+      color: #fff; padding: 7.5rem 0 8.5rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+    }
+    .hero .wrap { position: relative; z-index: 1; }
+    .hero .eyebrow { margin-bottom: 2rem; }
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif; font-weight: 400;
+      font-size: clamp(2.5rem, 5.6vw, 4.15rem); line-height: 1.08; letter-spacing: -0.025em;
+      max-width: 19ch; margin: 0 auto 1.75rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(1.0625rem, 1.8vw, 1.25rem); font-weight: 300; line-height: 1.6;
+      color: rgba(255,255,255,0.72); max-width: 40ch; margin: 0 auto 2.75rem;
+    }
+    .hero-cta { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
+    .hero-strip {
+      margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.09);
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 2.75rem;
+    }
+    .hero-strip span { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .hero-strip svg { flex-shrink: 0; }
+
+    /* ---------- Section shell ---------- */
+    .section { padding: 6.5rem 0; position: relative; }
+    .section-navy { background: var(--navy); color: #fff; }
+    .section-deep { background: linear-gradient(180deg, var(--navy-deep), var(--navy)); color: #fff; }
+    .section-white { background: #fff; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .section-head { margin-bottom: 3.75rem; }
+    .section-head .eyebrow { color: var(--accent-dim); margin-bottom: 1.5rem; }
+    .section-head .eyebrow::before, .section-head .eyebrow::after { background: rgba(169,141,85,0.45); }
+    .section-navy .section-head .eyebrow, .section-deep .section-head .eyebrow { color: var(--accent); }
+    .section-navy .section-head .eyebrow::before, .section-navy .section-head .eyebrow::after,
+    .section-deep .section-head .eyebrow::before, .section-deep .section-head .eyebrow::after { background: rgba(200,169,110,0.5); }
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif; font-weight: 400;
+      font-size: clamp(2rem, 3.7vw, 3rem); line-height: 1.14; letter-spacing: -0.02em;
+      max-width: 21ch; margin: 0 auto;
+    }
+    .section-navy h2, .section-deep h2 { color: #fff; }
+    .lede { font-size: 1.0625rem; font-weight: 300; line-height: 1.8; color: var(--body); max-width: 58ch; margin: 0 auto; }
+    .lede p + p { margin-top: 1.25rem; }
+    .lede strong { font-weight: 600; color: var(--navy); }
+
+    /* ---------- Reality / pull quote ---------- */
+    .quote-block { max-width: 780px; margin: 0 auto; }
+    .quote-mark {
+      font-family: 'DM Serif Display', Georgia, serif; font-size: 5rem; line-height: 0.7;
+      color: rgba(200,169,110,0.38); margin-bottom: 0.9rem;
+    }
+    .quote-lead {
+      font-family: 'DM Serif Display', Georgia, serif; font-weight: 400;
+      font-size: clamp(1.35rem, 2.4vw, 1.85rem); line-height: 1.42; letter-spacing: -0.01em;
+      color: var(--navy); max-width: 28ch; margin: 0 auto 2rem;
+    }
+    .quote-lead b { color: var(--accent-dim); font-weight: 400; font-style: italic; }
+    .good-news {
+      display: inline-block; margin-top: 2.25rem; padding: 1.1rem 2rem;
+      background: #fff; border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+      box-shadow: var(--shadow-sm); font-size: 1rem; font-weight: 500; color: var(--navy);
+    }
+
+    /* ---------- Video ---------- */
+    .video-frame {
+      position: relative; border: 1px solid rgba(200,169,110,0.28); border-radius: 3px;
+      background: linear-gradient(155deg, #14294a 0%, #0b1c37 60%, #0a1830 100%);
+      aspect-ratio: 16 / 9; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.5rem; padding: 2rem;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    .video-frame::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle 380px at 50% 42%, rgba(200,169,110,0.11), transparent 70%);
+    }
+    .play-btn {
+      position: relative; width: 78px; height: 78px; border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.6); display: grid; place-items: center;
+      background: rgba(200,169,110,0.08);
+    }
+    .play-btn::after { content: ""; position: absolute; inset: -12px; border-radius: 50%; border: 1px solid rgba(200,169,110,0.22); }
+    .play-btn svg { margin-left: 4px; }
+    .video-badge {
+      position: relative; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      border: 1px solid rgba(200,169,110,0.45); padding: 0.5rem 1.1rem; border-radius: 2px;
+    }
+    .video-frame p { position: relative; font-size: 0.9375rem; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 44ch; }
+
+    /* ---------- Card grid ---------- */
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card {
+      background: #fff; border: 1px solid var(--rule); border-radius: 3px;
+      padding: 2.25rem 1.75rem; box-shadow: var(--shadow-sm);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      display: flex; flex-direction: column; align-items: center; gap: 1.1rem;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(200,169,110,0.5); }
+    .card p { font-size: 0.9688rem; font-weight: 300; line-height: 1.72; color: var(--body); }
+    .card-icon {
+      width: 46px; height: 46px; display: grid; place-items: center; flex-shrink: 0;
+      border: 1px solid rgba(200,169,110,0.5); border-radius: 50%; background: rgba(200,169,110,0.07);
+    }
+
+    .card-dark {
+      background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px; padding: 2.25rem 1.75rem;
+      transition: transform 0.25s, border-color 0.25s, background 0.25s;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .card-dark:hover { transform: translateY(-4px); border-color: rgba(200,169,110,0.55); background: rgba(200,169,110,0.05); }
+    .card-dark h3 { font-size: 1.0625rem; font-weight: 600; color: #fff; }
+    .card-dark p { font-size: 0.9375rem; font-weight: 300; line-height: 1.72; color: rgba(255,255,255,0.62); }
+
+    /* ---------- Steps ---------- */
+    .steps { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); }
+    .step-card {
+      background: #fff; border: 1px solid var(--rule); border-radius: 3px;
+      padding: 2.5rem 1.75rem 2.25rem; box-shadow: var(--shadow-sm); position: relative;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    }
+    .step-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: rgba(200,169,110,0.55); }
+    .step-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .step-card:hover::before { opacity: 1; }
+    .step-num { font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+    .step-tag {
+      font-size: 0.625rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); background: var(--off-white); border: 1px solid var(--rule);
+      padding: 0.3rem 0.7rem; border-radius: 100px;
+    }
+    .step-card h3 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; font-size: 1.3rem; line-height: 1.28; color: var(--navy); }
+    .step-card p { font-size: 0.9375rem; font-weight: 300; line-height: 1.72; color: var(--body); }
+
+    .overview-note {
+      display: inline-flex; align-items: center; gap: 0.75rem; margin: 1.75rem auto 0;
+      max-width: 60ch; font-size: 0.875rem; font-weight: 500; color: var(--accent-dim);
+      background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.4);
+      padding: 0.8rem 1.4rem; border-radius: 100px; line-height: 1.5;
+    }
+    .overview-note svg { flex-shrink: 0; }
+
+    /* ---------- Numbers band ---------- */
+    .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .num-val { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
+    .num-label { font-size: 0.8125rem; font-weight: 300; line-height: 1.55; color: rgba(255,255,255,0.6); max-width: 22ch; margin: 0 auto; }
+
+    /* ---------- Fit heading ---------- */
+    .fit-head { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; font-size: 1.5rem; margin-bottom: 2.25rem; color: var(--navy); }
+
+    /* ---------- Terms strip ---------- */
+    .terms-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem; }
+    .term { border: 1px solid rgba(200,169,110,0.3); border-radius: 3px; padding: 1.75rem 1.25rem; background: rgba(200,169,110,0.05); }
+    .term-label { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.42); margin-bottom: 0.6rem; }
+    .term-value { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.35rem; color: var(--accent); }
+
+    /* ---------- FAQ ---------- */
+    .faq { max-width: 800px; margin: 0 auto; display: grid; gap: 0.75rem; }
+    .faq details { background: #fff; border: 1px solid var(--rule); border-radius: 3px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .faq details:hover { border-color: rgba(200,169,110,0.5); }
+    .faq details[open] { box-shadow: var(--shadow-sm); border-color: rgba(200,169,110,0.5); }
+    .faq summary {
+      list-style: none; cursor: pointer; padding: 1.5rem 3.25rem; position: relative;
+      font-size: 1.03rem; font-weight: 500; color: var(--navy); transition: color 0.2s;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--accent-dim); }
+    .faq summary::after {
+      content: ""; position: absolute; right: 1.5rem; top: 50%; width: 10px; height: 10px;
+      border-right: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent);
+      transform: translateY(-70%) rotate(45deg); transition: transform 0.25s;
+    }
+    .faq details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+    .faq .answer { padding: 0 2.25rem 1.85rem; font-size: 0.9688rem; font-weight: 300; line-height: 1.8; color: var(--body); max-width: 62ch; margin: 0 auto; }
+    .faq .answer p + p { margin-top: 1rem; }
+
+    /* ---------- Closing CTA ---------- */
+    .cta {
+      background: radial-gradient(ellipse 800px 420px at 50% 0%, #17325c 0%, var(--navy) 50%, var(--navy-deep) 100%);
+      color: #fff; padding: 7rem 0; position: relative; overflow: hidden;
+    }
+    .cta::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 10%, transparent 72%);
+      mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 10%, transparent 72%);
+    }
+    .cta .wrap { position: relative; z-index: 1; }
+    .cta h2 { margin: 0 auto 1.5rem; max-width: 17ch; }
+    .cta .lede { color: rgba(255,255,255,0.72); margin: 0 auto 2.5rem; max-width: 50ch; }
+    .cta-actions { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 2.25rem; font-size: 0.8125rem; color: rgba(255,255,255,0.45); }
+
+    /* ---------- Footer ---------- */
+    .footer { background: var(--navy-deep); color: #fff; padding: 4rem 0 2.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-label { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.25rem; }
+    .footer-contact a { display: block; width: fit-content; margin: 0 auto; font-family: 'DM Serif Display', Georgia, serif; font-size: 1.3rem; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.2rem; transition: border-color 0.2s, color 0.2s; }
+    .footer-contact a + a { margin-top: 0.9rem; }
+    .footer-contact a:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.75rem; margin-top: 2.75rem; }
+    .footer-nav a { font-size: 0.9375rem; font-weight: 300; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--accent); }
+    .footer-bottom { margin-top: 2.75rem; padding-top: 1.75rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 980px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .numbers { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 1.5rem; }
+    }
+    @media (max-width: 780px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .terms-strip { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .wrap, .header-inner { padding-left: 1.35rem; padding-right: 1.35rem; }
+      .nav { display: none; }
+      .hero { padding: 4.5rem 0 5rem; }
+      .section, .cta { padding: 4.5rem 0; }
+      .hero-strip { gap: 0.9rem 1.5rem; }
+      .faq summary { padding: 1.35rem 3rem 1.35rem 1.35rem; text-align: left; }
+      .faq .answer { padding: 0 1.35rem 1.5rem; text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-  <section class="hero">
-    <nav class="hero-nav">
-      <a href="/" class="wordmark">AceBound</a>
-    </nav>
-    <div class="hero-body">
-      <p class="eyebrow">Seller Origination · Home Services M&amp;A</p>
-      <h1 class="hero-headline">Qualified seller meetings,<br />booked <em>directly</em><br />to your calendar.</h1>
-      <p class="hero-sub">Boutique M&amp;A advisors in HVAC, plumbing, electrical, and adjacent home-service verticals — we source the seller conversations you don't have time to find.</p>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#top" class="wordmark"><span class="mark"></span>AceBound</a>
+      <nav class="nav">
+        <a href="#who">Who It's For</a>
+        <a href="#process">Our System</a>
+        <a href="#engagement">Engagement</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="btn btn-gold">Book a Call</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <p class="eyebrow">Seller Origination · Boutique &amp; Middle-Market M&amp;A</p>
+      <h1>Building a predictable pipeline of business owners <em>considering an exit</em></h1>
+      <p class="hero-sub">…Without hiring more BD staff, relying on referrals, or paying success fees.</p>
       <div class="hero-cta">
-        <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="btn-primary">Book an intro call &rarr;</a>
-        <a href="mailto:trevorc@aceboundagency.com" class="btn-secondary">Email us</a>
+        <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="btn btn-gold btn-lg">Book a Call <span class="arw">&rarr;</span></a>
+        <a href="mailto:trevorc@aceboundagency.com" class="btn btn-ghost btn-lg">Email Us</a>
+      </div>
+      <div class="hero-strip">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> No success fees</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Month to month</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> One firm per niche, per market</span>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <p class="section-label">What we do</p>
-    <h2 class="section-headline">We close the seller-side gap.</h2>
-    <div class="body-text">
-      <p>Boutique M&amp;A firms in home services have the buyer side handled. What's harder is consistent seller flow. AceBound closes that gap.</p>
-      <p>We run direct outreach to qualifying owners — typically $3–15M revenue, 50+, with a real exit trigger — qualify every prospect against your specific buy-box, and only the meetings that fit ever reach your calendar.</p>
-      <p>Each engagement is exclusive. We work with a small number of firms at a time, and the seller relationships we open belong to you alone.</p>
-    </div>
-    <div class="stat-grid">
-      <div><p class="stat-label">Revenue</p><p class="stat-value">$3M – $15M qualifying range</p></div>
-      <div><p class="stat-label">Owner profile</p><p class="stat-value">50+, real exit trigger present</p></div>
-      <div><p class="stat-label">Fit</p><p class="stat-value">Matched to your buy-box only</p></div>
-      <div><p class="stat-label">Exclusivity</p><p class="stat-value">One firm per market</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <p class="section-label">Who it's for</p>
-    <h2 class="section-headline">Built for the firms where pipeline is the constraint.</h2>
-    <div class="body-text">
-      <p>Built for boutique advisory firms in HVAC, plumbing, electrical, mechanical, and adjacent home-service verticals — typically 2–10 person shops whose constraint is seller-side pipeline, not buyer relationships.</p>
-      <p>If you have the process, the buyers, and the closing capability — but the funnel runs dry between deals — that's exactly the problem we're built to solve.</p>
+  <!-- ============ THE REALITY ============ -->
+  <section class="section" id="reality">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">The reality</p>
+        <h2>Cold outbound isn't dead. Most of it is just badly aimed.</h2>
+      </div>
+      <div class="quote-block reveal">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="quote-lead">Most firms believe that cold emailing is dead, but the real issue is <b>how we are addressing the targets</b> in the email.</p>
+        <div class="lede">
+          <p>This industry yields a below average response rate compared to other B2B industries, making it difficult but NOT impossible.</p>
+          <p>Pipeline flow is entirely possible as long as you tailor your emails demonstrating real knowledge of their business. Personalization will yield higher response rates at every level of B2B outreach.</p>
+        </div>
+        <p class="good-news">There's good news. This is a solvable problem.</p>
+      </div>
     </div>
   </section>
 
+  <!-- ============ VIDEO ============ -->
+  <section class="section section-deep" id="video">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Walkthrough</p>
+        <h2>How the DFY Outreach system works in detail</h2>
+      </div>
+      <div class="video-frame reveal">
+        <div class="play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#c8a96e"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span class="video-badge">Video coming soon</span>
+        <p>A short walkthrough of how we build and run seller origination campaigns. In the meantime, the overview of each step is below.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO IT'S FOR ============ -->
+  <section class="section" id="who">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Who it's for</p>
+        <h2>Built for firms where seller flow is the constraint.</h2>
+      </div>
+      <p class="fit-head reveal">This is for you if…</p>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </span>
+          <p>You're a CEO or Founder in a Boutique to Middle Market M&amp;A firm looking to achieve a predictable pipeline.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.6c0-1 1.1-1.7 2.5-1.7s2.5.7 2.5 1.7-1.1 1.7-2.5 1.7-2.5.8-2.5 1.8 1.1 1.7 2.5 1.7 2.5-.7 2.5-1.7"/></svg>
+          </span>
+          <p>You've spent $150-200K on in house BD that generated no tangible ROI.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11h-6"/></svg>
+          </span>
+          <p>You want to add deal volume without hiring an analyst, adding overhead or building an in-house outbound team.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <p>You've been relying on word-of-mouth referrals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="section section-white" id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Our system</p>
+        <h2>The 5-Step Process That Makes Cold Outbound Actually Work for Sell-Side M&amp;A Firms</h2>
+        <p class="overview-note">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a98d55" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          This is a high level overview. The full detail on each step is covered in the video above.
+        </p>
+      </div>
+
+      <div class="steps reveal">
+        <div class="step-card">
+          <p class="step-num">01</p>
+          <span class="step-tag">Manual</span>
+          <h3>Define the Buy Box Accurately</h3>
+          <p>We define with precision: Niche, Geography, Revenue Band, and any exclusions, then layer in intent signals. This type of precision is what finds viable prospects instead of keeping it general and just praying.</p>
+        </div>
+
+        <div class="step-card">
+          <p class="step-num">02</p>
+          <span class="step-tag">Manual</span>
+          <h3>Set up Email Outreach Infrastructure</h3>
+          <p>3 to 5 sending domains separate from your primary, 2 to 3 mailboxes on each, SPF, DKIM and DMARC configured on every one, and 14 to 21 days of warmup. Your firm's main domain never carries campaign risk.</p>
+        </div>
+
+        <div class="step-card">
+          <p class="step-num">03</p>
+          <span class="step-tag">Manual / AI Driven</span>
+          <h3>Build Target List</h3>
+          <p>Every company on the list gets its actual website and LinkedIn read. Services, markets, location, years in business, hiring signals, leadership, credentials and recent announcements, extracted as fields the databases are not doing.</p>
+        </div>
+
+        <div class="step-card">
+          <p class="step-num">04</p>
+          <span class="step-tag">Manual / AI Driven</span>
+          <h3>Deploy Personalized Campaign</h3>
+          <p>Every email is written off what we pulled and then enriched, not just the industry code and revenue. Multiple sequences run against split segments of the list. Whichever wins becomes the principal sequence.</p>
+        </div>
+
+        <div class="step-card">
+          <p class="step-num">05</p>
+          <span class="step-tag">Recommended to Firm</span>
+          <h3>Utilize CTA Item</h3>
+          <p>Asking for a 30 minute call is a heavy first ask. Instead we recommend that you lead with an Exit Readiness Scorecard that grades their business across a few value drivers specific to your niche. This is now an offer instead of an ask.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INFRASTRUCTURE NUMBERS ============ -->
+  <section class="section section-navy" id="infrastructure" style="padding:4.5rem 0;">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:3rem;">
+        <p class="eyebrow">The infrastructure</p>
+      </div>
+      <div class="numbers reveal">
+        <div>
+          <p class="num-val">3 to 5</p>
+          <p class="num-label">Sending domains, separate from your primary</p>
+        </div>
+        <div>
+          <p class="num-val">14 to 21</p>
+          <p class="num-label">Days of warmup before a single campaign send</p>
+        </div>
+        <div>
+          <p class="num-val">25 to 40</p>
+          <p class="num-label">Sends per inbox per day, rotated across the pool</p>
+        </div>
+        <div>
+          <p class="num-val">6,600</p>
+          <p class="num-label">Emails a month on infrastructure that stays clean</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENGAGEMENT ============ -->
+  <section class="section section-deep" id="engagement">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">The engagement</p>
+        <h2>When you work with AceBound you will…</h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card-dark">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg>
+          </span>
+          <h3>A pipeline under your firm's name</h3>
+          <p>Have a pipeline running under your firm's name, no 3rd party.</p>
+        </div>
+        <div class="card-dark">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </span>
+          <h3>Zero hours of your team's time</h3>
+          <p>Spend 0 hours on writing, sending or following up on outreach emails.</p>
+        </div>
+        <div class="card-dark">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12.5" y="8" width="3" height="10"/><rect x="18" y="5" width="3" height="13"/></svg>
+          </span>
+          <h3>Analytics to drive decisions</h3>
+          <p>Will have analytics to drive future decisions.</p>
+        </div>
+        <div class="card-dark">
+          <span class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>
+          </span>
+          <h3>Exclusivity in your market</h3>
+          <p>Have exclusivity to a region in your market, creating 0 competition with other clients.</p>
+        </div>
+      </div>
+      <div class="terms-strip reveal">
+        <div class="term">
+          <p class="term-label">Fees</p>
+          <p class="term-value">No success fees</p>
+        </div>
+        <div class="term">
+          <p class="term-label">Commitment</p>
+          <p class="term-value">Month to month</p>
+        </div>
+        <div class="term">
+          <p class="term-label">Territory</p>
+          <p class="term-value">One firm per market</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions we get asked.</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>If you just told me the secrets, can't I just do it?</summary>
+          <div class="answer">
+            <p>You could, you could spend hours configuring the DNS settings. You could spend hours scratching your head wondering if the template you created was correct even if you followed my instructions. Or if you don't have time, you could ask your fresh out of college analyst to do it and put that pressure on him while paying him a large amount. Even worse, you see deliverability is dropping and you don't know why. It could be a new google policy, could be market changes. One things for certain, you'll spend precious time figuring it out.</p>
+            <p>Or you could let AceBound do all of that for you.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How are you different than any other outbound agency?</summary>
+          <div class="answer">
+            <p>I understand you may have been burnt in the past or are new to this. Most run the same script where they buy a list, blast a sequence, and move on.</p>
+            <p>We understand that sell-side M&amp;A requires relationship building and nurturing. Our emails are tailored and to be hyper specific to your industry. There will be multiple touchpoints across a year to ensure your target knows who you are.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What if the universe in my state is too thin?</summary>
+          <div class="answer">
+            <p>Sure, it's definitely a possibility. We will show you beforehand, so you know what you are getting into. If it's not deep enough, no engagement will be signed.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Is there a contract?</summary>
+          <div class="answer">
+            <p>Month to month, no annual term, no success fees.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Do you guarantee meetings?</summary>
+          <div class="answer">
+            <p>Great question. No, we can't guarantee x amount of meetings a month. We understand that a relationship takes time.</p>
+            <p>We can guarantee that these owners will be seeing your name consistently over the year and that is huge for rapport.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How do markets get assigned?</summary>
+          <div class="answer">
+            <p>We will work with one firm per niche, per state or metro. Once a market is locked it's off the board until that engagement ends. If you're planning around a certain niche or area, it's worth checking whether it's still open.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING CTA ============ -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <p class="eyebrow" style="margin-bottom:1.5rem;">Next step</p>
+      <h2>See whether your market is deep enough.</h2>
+      <p class="lede">Once on a call, we'll go through your industry niche, your buy box, metros targeted, and whether the universe in those markets are deep enough for you.</p>
+      <div class="cta-actions">
+        <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="btn btn-gold btn-lg">Schedule a Call <span class="arw">&rarr;</span></a>
+        <a href="mailto:trevorc@aceboundagency.com" class="btn btn-ghost btn-lg">Email Us Instead</a>
+      </div>
+      <p class="cta-note">No success fees. Month to month. We work with one firm per niche, per market.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <p class="footer-label">Get in touch</p>
-    <a href="mailto:trevorc@aceboundagency.com" class="footer-email">trevorc@aceboundagency.com</a>
-    <a href="tel:2679054650" class="footer-email">267-905-4650</a>
-    <a href="https://calendly.com/trevorc-aceboundagency/new-meeting" class="footer-email">Book an intro call &rarr;</a>
-    <p class="footer-note">© 2026 AceBound. All rights reserved.</p>
+    <div class="wrap">
+      <p class="footer-label">Get in touch</p>
+      <div class="footer-contact">
+        <a href="mailto:trevorc@aceboundagency.com">trevorc@aceboundagency.com</a>
+        <a href="tel:2679054650">267-905-4650</a>
+      </div>
+      <nav class="footer-nav">
+        <a href="#who">Who It's For</a>
+        <a href="#process">Our System</a>
+        <a href="#engagement">Engagement</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://calendly.com/trevorc-aceboundagency/new-meeting">Book a Call</a>
+      </nav>
+      <p class="footer-bottom">© 2026 AceBound. All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+
+      // Failsafe: never leave content hidden if the observer does not fire.
+      setTimeout(function () {
+        els.forEach(function (el) { el.classList.add('in'); });
+      }, 1800);
+    })();
+  </script>
+
 </body>
 </html>
