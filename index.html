@@ -315,6 +315,111 @@
     .footer-nav a:hover { color: var(--accent); }
     .footer-bottom { margin-top: 2.75rem; padding-top: 1.75rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
 
+
+    /* ---------- Scroll progress ---------- */
+    .progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent-lt));
+      z-index: 100; transition: width 0.1s linear; pointer-events: none;
+    }
+
+    /* ---------- Staggered reveal ---------- */
+    .js .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .js .stagger.in > * { opacity: 1; transform: none; }
+    .js .stagger.in > *:nth-child(1) { transition-delay: 0.04s; }
+    .js .stagger.in > *:nth-child(2) { transition-delay: 0.12s; }
+    .js .stagger.in > *:nth-child(3) { transition-delay: 0.20s; }
+    .js .stagger.in > *:nth-child(4) { transition-delay: 0.28s; }
+    .js .stagger.in > *:nth-child(5) { transition-delay: 0.36s; }
+    .js .stagger.in > *:nth-child(6) { transition-delay: 0.44s; }
+
+    /* ---------- Hero entrance ---------- */
+    @keyframes heroIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+    @keyframes ruleIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    .js .hero .wrap > * { animation: heroIn 0.85s cubic-bezier(0.22,1,0.36,1) both; }
+    .js .hero .wrap > *:nth-child(1) { animation-delay: 0.05s; }
+    .js .hero .wrap > *:nth-child(2) { animation-delay: 0.18s; }
+    .js .hero .wrap > *:nth-child(3) { animation-delay: 0.30s; }
+    .js .hero .wrap > *:nth-child(4) { animation-delay: 0.42s; }
+    .js .hero .wrap > *:nth-child(5) { animation-delay: 0.54s; }
+
+    /* Gold underline that draws itself beneath the italic phrase */
+    .hero h1 em { position: relative; }
+    .hero h1 em::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0.06em; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(200,169,110,0.85), transparent);
+      transform-origin: center;
+    }
+    .js .hero h1 em::after { animation: ruleIn 1s cubic-bezier(0.22,1,0.36,1) 0.85s both; }
+
+    /* ---------- Header condense on scroll ---------- */
+    .site-header { transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; }
+    .site-header.scrolled { background: rgba(7,21,44,0.97); box-shadow: 0 6px 26px rgba(0,0,0,0.32); }
+    .site-header.scrolled .header-inner { padding-top: 0.65rem; padding-bottom: 0.65rem; }
+    .header-inner { transition: padding 0.3s ease; }
+
+    /* ---------- Button sheen ---------- */
+    .btn { position: relative; overflow: hidden; }
+    .btn::before {
+      content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.38), transparent);
+      transform: skewX(-18deg); transition: left 0.55s ease;
+    }
+    .btn:hover::before { left: 130%; }
+    .btn-ghost::before { background: linear-gradient(90deg, transparent, rgba(200,169,110,0.22), transparent); }
+
+    /* ---------- Richer card hover ---------- */
+    .card, .card-dark, .step-card { position: relative; }
+    .card .card-icon, .card-dark .card-icon, .step-card .step-icon {
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .card:hover .card-icon, .card-dark:hover .card-icon, .step-card:hover .step-icon {
+      transform: translateY(-3px) scale(1.07);
+      background: rgba(200,169,110,0.18);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 6px rgba(200,169,110,0.08);
+    }
+    .step-card .step-num { transition: color 0.3s, transform 0.3s; }
+    .step-card:hover .step-num { color: var(--accent-dim); transform: translateY(-2px); }
+    .card-dark::after {
+      content: ""; position: absolute; inset: 0; border-radius: 3px; pointer-events: none;
+      background: radial-gradient(circle 220px at 50% 0%, rgba(200,169,110,0.10), transparent 70%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .card-dark:hover::after { opacity: 1; }
+
+    /* ---------- Play button pulse ---------- */
+    @keyframes ringPulse {
+      0%   { transform: scale(1);    opacity: 0.55; }
+      70%  { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+    .js .play-btn::after { animation: ringPulse 2.8s ease-out infinite; }
+    .play-btn { transition: transform 0.3s, background 0.3s, border-color 0.3s; }
+    .video-frame:hover .play-btn { transform: scale(1.06); background: rgba(200,169,110,0.16); border-color: var(--accent); }
+
+    /* ---------- FAQ open animation ---------- */
+    @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+    .js .faq details[open] .answer { animation: faqIn 0.35s ease both; }
+    .faq details { transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+    .faq details:hover { transform: translateY(-2px); }
+
+    /* ---------- Footer + contact link sweeps ---------- */
+    .footer-nav a { position: relative; }
+    .footer-nav a::after {
+      content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 1px;
+      background: var(--accent); transition: width 0.25s;
+    }
+    .footer-nav a:hover::after { width: 100%; }
+
+    /* ---------- Section label rules animate in ---------- */
+    .js .reveal.in .eyebrow::before, .js .reveal.in .eyebrow::after,
+    .js .stagger.in .eyebrow::before, .js .stagger.in .eyebrow::after { animation: ruleIn 0.7s ease 0.15s both; }
+
+    /* ---------- Terms hover ---------- */
+    .term { transition: transform 0.25s, border-color 0.25s, background 0.25s; }
+    .term:hover { transform: translateY(-3px); border-color: rgba(200,169,110,0.65); background: rgba(200,169,110,0.09); }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 980px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
@@ -336,11 +441,15 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; animation: none !important; }
-      .js .reveal { opacity: 1; transform: none; }
+      .js .reveal, .js .stagger > * { opacity: 1 !important; transform: none !important; }
+      .js .hero .wrap > * { opacity: 1 !important; transform: none !important; }
+      .progress { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <div class="progress" id="progress"></div>
 
   <header class="site-header">
     <div class="header-inner">
@@ -417,7 +526,7 @@
         <h2>Built for firms where seller flow is the constraint.</h2>
       </div>
       <p class="fit-head reveal">This is for you if…</p>
-      <div class="grid grid-2 reveal">
+      <div class="grid grid-2 stagger">
         <div class="card">
           <span class="card-icon">
             <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
@@ -458,7 +567,7 @@
         </p>
       </div>
 
-      <div class="steps reveal">
+      <div class="steps stagger">
         <div class="step-card">
           <div class="step-head">
             <span class="step-icon">
@@ -529,7 +638,7 @@
         <p class="eyebrow">The engagement</p>
         <h2>When you work with AceBound you will…</h2>
       </div>
-      <div class="grid grid-2 reveal">
+      <div class="grid grid-2 stagger">
         <div class="card-dark">
           <span class="card-icon">
             <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg>
@@ -559,7 +668,7 @@
           <p>Have exclusivity to a region in your market, creating 0 competition with other clients.</p>
         </div>
       </div>
-      <div class="terms-strip reveal">
+      <div class="terms-strip stagger">
         <div class="term">
           <p class="term-label">Fees</p>
           <p class="term-value">No success fees</p>
@@ -583,7 +692,7 @@
         <p class="eyebrow">FAQ</p>
         <h2>Questions we get asked.</h2>
       </div>
-      <div class="faq reveal">
+      <div class="faq stagger">
         <details>
           <summary>If you just told me the secrets, can't I just do it?</summary>
           <div class="answer">
@@ -675,7 +784,7 @@
 
   <script>
     (function () {
-      var els = document.querySelectorAll('.reveal');
+      var els = document.querySelectorAll('.reveal, .stagger');
       if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         els.forEach(function (el) { el.classList.add('in'); });
         return;
@@ -691,6 +800,24 @@
       setTimeout(function () {
         els.forEach(function (el) { el.classList.add('in'); });
       }, 1800);
+    })();
+
+    // Scroll progress bar + condensing header
+    (function () {
+      var bar = document.getElementById('progress');
+      var header = document.querySelector('.site-header');
+      var ticking = false;
+      function update() {
+        var st = window.scrollY || document.documentElement.scrollTop;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        if (bar) bar.style.width = (max > 0 ? (st / max) * 100 : 0) + '%';
+        if (header) header.classList.toggle('scrolled', st > 40);
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
     })();
   </script>
 
