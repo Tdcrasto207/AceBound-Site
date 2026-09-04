@@ -122,6 +122,14 @@
     .footer-nav a:hover::after { width: 100%; }
     .footer-bottom { margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
 
+    /* Landing target gets a brief gold flag so you can see where you arrived */
+    @keyframes catLand {
+      0%   { background: rgba(200,169,110,0.22); }
+      100% { background: rgba(200,169,110,0); }
+    }
+    .cat.landed .cat-head { animation: catLand 2.2s ease-out both; border-bottom-color: var(--accent); }
+    .cat.landed .cat-head h2 { color: var(--accent-dim); }
+
     @media (max-width: 800px) {
       .nav { display: none; }
       .jump { display: none; }
@@ -477,6 +485,71 @@
         if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
       }, { passive: true });
       update();
+    })();
+
+    // Deep links: land exactly on the requested category.
+    // Fonts load after the browser's first jump and reflow everything above
+    // the target, so we re-position once the layout has actually settled.
+    (function () {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      var OFFSET = 130; // sticky header + category jump bar
+
+      function targetEl() {
+        var id = decodeURIComponent((location.hash || '').slice(1));
+        return id ? document.getElementById(id) : null;
+      }
+
+      function jump(flag) {
+        var el = targetEl();
+        if (!el) return;
+        // Reveal everything so nothing is mid-animation while we measure
+        var r = document.querySelectorAll('.reveal');
+        for (var i = 0; i < r.length; i++) r[i].classList.add('in');
+        var root = document.documentElement;
+        var prevBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';   // never animate the landing
+        var y = el.getBoundingClientRect().top + window.pageYOffset - OFFSET;
+        y = y < 0 ? 0 : y;
+        window.scrollTo({ top: y, behavior: 'auto' });
+        // Fallbacks, in case scrollTo is ignored by the browser
+        if (Math.abs(window.pageYOffset - y) > 4) root.scrollTop = y;
+        if (Math.abs(window.pageYOffset - y) > 4) el.scrollIntoView({ block: 'start', behavior: 'auto' });
+        root.style.scrollBehavior = prevBehavior;
+        if (flag) {
+          var prev = document.querySelector('.cat.landed');
+          if (prev) prev.classList.remove('landed');
+          void el.offsetWidth;
+          el.classList.add('landed');
+        }
+      }
+
+      if (location.hash) {
+        jump(true);
+        window.addEventListener('load', function () { jump(false); });
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () { setTimeout(function () { jump(false); }, 60); });
+        }
+        setTimeout(function () { jump(false); }, 400);
+      }
+
+      window.addEventListener('hashchange', function () { setTimeout(function () { jump(true); }, 10); });
+
+      // In-page category jump bar uses the same corrected positioning
+      document.querySelectorAll('.jump a').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href').slice(1);
+          var el = document.getElementById(id);
+          if (!el) return;
+          e.preventDefault();
+          history.replaceState(null, '', '#' + id);
+          var y = el.getBoundingClientRect().top + window.pageYOffset - OFFSET;
+          window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+          var prev = document.querySelector('.cat.landed');
+          if (prev) prev.classList.remove('landed');
+          void el.offsetWidth;
+          el.classList.add('landed');
+        });
+      });
     })();
 
     // Live search

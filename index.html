@@ -434,14 +434,25 @@
     }
     .mq-label a { color: inherit; text-decoration: none; transition: color 0.2s; }
     .mq-label a:hover { color: var(--accent); }
-    .marquee {
-      display: flex; width: max-content;
+    .marquee-viewport {
+      overflow-x: auto; overflow-y: hidden;
+      scroll-behavior: auto;              /* never smooth: it fights the auto-roll */
+      overscroll-behavior-x: contain;
+      scrollbar-width: none; -ms-overflow-style: none;
+      cursor: grab;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
-    @keyframes mqScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .js .marquee { animation: mqScroll 48s linear infinite; }
-    .js .marquee:hover { animation-play-state: paused; }
+    .marquee-viewport::-webkit-scrollbar { display: none; }
+    .marquee-viewport.dragging { cursor: grabbing; }
+    .marquee-viewport.dragging .mq-item { user-select: none; }
+    .marquee { display: flex; width: max-content; }
+    .mq-hint {
+      margin-top: 1.25rem; font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22);
+      transition: color 0.3s;
+    }
+    .marquee-band:hover .mq-hint { color: rgba(255,255,255,0.4); }
     .mq-track {
       display: flex; align-items: center; list-style: none;
       flex-shrink: 0; margin: 0; padding: 0;
@@ -487,9 +498,11 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; animation: none !important; }
       .js .reveal, .js .stagger > * { opacity: 1 !important; transform: none !important; }
-      .marquee { width: auto; flex-wrap: wrap; justify-content: center; -webkit-mask-image: none; mask-image: none; }
+      .marquee-viewport { -webkit-mask-image: none; mask-image: none; }
+      .marquee { width: auto; flex-wrap: wrap; justify-content: center; }
       .mq-track[aria-hidden="true"] { display: none; }
       .mq-track { flex-wrap: wrap; justify-content: center; gap: 0.5rem 0; }
+      .mq-hint { display: none; }
       .js .hero .wrap > * { opacity: 1 !important; transform: none !important; }
       .progress { display: none; }
     }
@@ -533,7 +546,8 @@
   <!-- ============ VERTICALS MARQUEE ============ -->
   <section class="marquee-band" id="verticals" aria-label="Verticals we cover">
     <p class="mq-label"><a href="/niches.html">Verticals we build buy boxes for &rarr;</a></p>
-    <div class="marquee">
+    <div class="marquee-viewport" id="mqViewport">
+      <div class="marquee">
       <ul class="mq-track">
         <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#home-building">Home &amp; Building Services</a></li>
         <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#healthcare-providers">Healthcare · Provider Practices</a></li>
@@ -564,7 +578,9 @@
         <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#education">Education &amp; Training</a></li>
         <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#financial">Financial Services</a></li>
       </ul>
+      </div>
     </div>
+    <p class="mq-hint">Drag or swipe to browse</p>
   </section>
 
   <!-- ============ THE REALITY ============ -->
@@ -885,6 +901,103 @@
       setTimeout(function () {
         els.forEach(function (el) { el.classList.add('in'); });
       }, 1800);
+    })();
+
+
+    // Verticals marquee: auto-rolls, but the visitor can drag, swipe or
+    // trackpad-scroll it themselves. Auto-roll resumes once they let go.
+    (function () {
+      var vp = document.getElementById('mqViewport');
+      if (!vp) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var SPEED = 0.4;          // px per frame
+      var RESUME_AFTER = 1600;  // ms of stillness before auto-roll resumes
+      var paused = false, resumeTimer = null, half = 0;
+
+      function measure() { half = vp.scrollWidth / 2; }
+      measure();
+      window.addEventListener('resize', measure);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+      // Start just off zero so wrapping backwards has somewhere to go.
+      vp.scrollLeft = 1;
+
+      function wrap() {
+        if (!half) return;
+        if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+        else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
+      }
+
+      function pause() {
+        paused = true;
+        if (resumeTimer) clearTimeout(resumeTimer);
+      }
+      function scheduleResume() {
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function () { paused = false; }, RESUME_AFTER);
+      }
+
+      if (!reduce) {
+        (function tick() {
+          if (!paused) { vp.scrollLeft += SPEED; wrap(); }
+          requestAnimationFrame(tick);
+        })();
+      }
+
+      // Hover holds it still so a name can be read or clicked
+      vp.addEventListener('mouseenter', pause);
+      vp.addEventListener('mouseleave', scheduleResume);
+
+      // Trackpad / shift-wheel / touch scrolling
+      vp.addEventListener('wheel', function () { pause(); scheduleResume(); }, { passive: true });
+      vp.addEventListener('touchstart', pause, { passive: true });
+      vp.addEventListener('touchend', scheduleResume, { passive: true });
+
+      // Mouse drag to scroll
+      var down = false, startX = 0, startScroll = 0, moved = 0;
+      vp.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        down = true; moved = 0;
+        startX = e.clientX; startScroll = vp.scrollLeft;
+        vp.classList.add('dragging');
+        pause();
+        try { vp.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      vp.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - startX;
+        moved = Math.max(moved, Math.abs(dx));
+        vp.scrollLeft = startScroll - dx;
+        wrap();
+      });
+      function endDrag(e) {
+        if (!down) return;
+        down = false;
+        vp.classList.remove('dragging');
+        try { vp.releasePointerCapture(e.pointerId); } catch (err) {}
+        scheduleResume();
+      }
+      vp.addEventListener('pointerup', endDrag);
+      vp.addEventListener('pointercancel', endDrag);
+
+      // A drag should not count as a click on a category link
+      vp.addEventListener('click', function (e) {
+        if (moved > 5) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+
+      // Keyboard: arrows nudge it when the strip has focus
+      vp.tabIndex = 0;
+      vp.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        pause();
+        vp.scrollLeft += (e.key === 'ArrowRight' ? 120 : -120);
+        wrap();
+        scheduleResume();
+      });
+      vp.addEventListener('focus', pause);
+      vp.addEventListener('blur', scheduleResume);
     })();
 
     // Scroll progress bar + condensing header
