@@ -435,24 +435,16 @@
     .mq-label a { color: inherit; text-decoration: none; transition: color 0.2s; }
     .mq-label a:hover { color: var(--accent); }
     .marquee-viewport {
-      overflow-x: auto; overflow-y: hidden;
-      scroll-behavior: auto;              /* never smooth: it fights the auto-roll */
-      overscroll-behavior-x: contain;
-      scrollbar-width: none; -ms-overflow-style: none;
-      cursor: grab;
+      overflow: hidden;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
-    .marquee-viewport::-webkit-scrollbar { display: none; }
-    .marquee-viewport.dragging { cursor: grabbing; }
-    .marquee-viewport.dragging .mq-item { user-select: none; }
     .marquee { display: flex; width: max-content; }
-    .mq-hint {
-      margin-top: 1.25rem; font-size: 0.75rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.22);
-      transition: color 0.3s;
-    }
-    .marquee-band:hover .mq-hint { color: rgba(255,255,255,0.4); }
+    /* Two identical tracks, so shifting by half the strip loops seamlessly */
+    @keyframes mqRoll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .js .marquee { animation: mqRoll 55s linear infinite; will-change: transform; }
+    /* Held still while hovered so a category can actually be clicked */
+    .js .marquee:hover { animation-play-state: paused; }
     .mq-track {
       display: flex; align-items: center; list-style: none;
       flex-shrink: 0; margin: 0; padding: 0;
@@ -507,7 +499,6 @@
       .marquee { width: auto; flex-wrap: wrap; justify-content: center; }
       .mq-track[aria-hidden="true"] { display: none; }
       .mq-track { flex-wrap: wrap; justify-content: center; gap: 0.5rem 0; }
-      .mq-hint { display: none; }
       .js .hero .wrap > * { opacity: 1 !important; transform: none !important; }
       .progress { display: none; }
     }
@@ -583,7 +574,6 @@
       </ul>
       </div>
     </div>
-    <p class="mq-hint">Drag or swipe to browse</p>
   </section>
 
   <!-- ============ THE REALITY ============ -->
@@ -906,128 +896,6 @@
       }, 1800);
     })();
 
-
-    // Verticals marquee: auto-rolls, and the visitor can drag, swipe,
-    // trackpad-scroll or arrow-key through it. Position is tracked as a float
-    // because element.scrollLeft is rounded to whole pixels by the browser,
-    // so incrementing it by a fraction each frame would never move at all.
-    (function () {
-      var vp = document.getElementById('mqViewport');
-      if (!vp) return;
-      var strip = vp.querySelector('.marquee');
-      var tracks = vp.querySelectorAll('.mq-track');
-      if (!strip || !tracks.length) return;
-
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var PX_PER_SEC = 34;
-      var RESUME_AFTER = 1500;
-      var paused = false, resumeTimer = null, unit = 0, pos = 0;
-
-      // One track's width is the loop distance. Add copies if a single loop
-      // would be narrower than the screen, or the wrap would visibly jump.
-      function measure() {
-        unit = tracks[0].getBoundingClientRect().width;
-        var guard = 0;
-        while (unit > 0 && unit * trackCount() < vp.clientWidth + unit && guard++ < 4) {
-          var clone = tracks[0].cloneNode(true);
-          clone.setAttribute('aria-hidden', 'true');
-          strip.appendChild(clone);
-        }
-      }
-      function trackCount() { return strip.querySelectorAll('.mq-track').length; }
-
-      measure();
-      window.addEventListener('resize', measure);
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-
-      pos = 0;
-      vp.scrollLeft = 0;
-
-      function pause() { paused = true; if (resumeTimer) clearTimeout(resumeTimer); }
-      function scheduleResume() {
-        if (resumeTimer) clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function () { pos = vp.scrollLeft; paused = false; }, RESUME_AFTER);
-      }
-
-      if (!reduce) {
-        var last = null;
-        requestAnimationFrame(function tick(now) {
-          if (last === null) last = now;
-          var dt = Math.min(now - last, 100); // ignore long gaps (tab was hidden)
-          last = now;
-          if (!paused && unit > 0) {
-            pos += PX_PER_SEC * (dt / 1000);
-            if (pos >= unit) pos -= unit;
-            vp.scrollLeft = pos;
-          }
-          requestAnimationFrame(tick);
-        });
-      }
-
-      // Wrap the visitor's own scrolling so it loops too
-      function wrapUser() {
-        if (!unit) return;
-        if (vp.scrollLeft >= unit) vp.scrollLeft -= unit;
-        else if (vp.scrollLeft <= 0) vp.scrollLeft += unit;
-      }
-
-      vp.addEventListener('mouseenter', pause);
-      vp.addEventListener('mouseleave', scheduleResume);
-      vp.addEventListener('wheel', function () { pause(); wrapUser(); scheduleResume(); }, { passive: true });
-      vp.addEventListener('touchstart', pause, { passive: true });
-      vp.addEventListener('touchend', function () { wrapUser(); scheduleResume(); }, { passive: true });
-
-      // Mouse drag. Pointer capture is only taken once a real drag starts,
-      // otherwise it would steal the click from the category link.
-      var down = false, startX = 0, startScroll = 0, moved = 0, capturing = false;
-      vp.addEventListener('pointerdown', function (e) {
-        if (e.pointerType !== 'mouse' || e.button !== 0) return;
-        down = true; moved = 0; capturing = false;
-        startX = e.clientX; startScroll = vp.scrollLeft;
-        pause();
-      });
-      vp.addEventListener('pointermove', function (e) {
-        if (!down) return;
-        var dx = e.clientX - startX;
-        moved = Math.max(moved, Math.abs(dx));
-        if (!capturing && moved > 4) {
-          capturing = true;
-          vp.classList.add('dragging');
-          try { vp.setPointerCapture(e.pointerId); } catch (err) {}
-        }
-        if (capturing) { vp.scrollLeft = startScroll - dx; wrapUser(); }
-      });
-      function endDrag(e) {
-        if (!down) return;
-        down = false;
-        if (capturing) {
-          vp.classList.remove('dragging');
-          try { vp.releasePointerCapture(e.pointerId); } catch (err) {}
-        }
-        scheduleResume();
-      }
-      vp.addEventListener('pointerup', endDrag);
-      vp.addEventListener('pointercancel', endDrag);
-
-      // Only swallow the click if it was actually a drag
-      vp.addEventListener('click', function (e) {
-        if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
-        moved = 0;
-      }, true);
-
-      // Keyboard access
-      vp.tabIndex = 0;
-      vp.addEventListener('keydown', function (e) {
-        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-        e.preventDefault();
-        pause();
-        vp.scrollLeft += (e.key === 'ArrowRight' ? 140 : -140);
-        wrapUser();
-        scheduleResume();
-      });
-      vp.addEventListener('focusin', pause);
-      vp.addEventListener('focusout', scheduleResume);
-    })();
 
     // Scroll progress bar + condensing header
     (function () {
