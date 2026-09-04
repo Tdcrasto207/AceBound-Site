@@ -108,12 +108,22 @@
       color: rgba(255,255,255,0.72); max-width: 40ch; margin: 0 auto 2.75rem;
     }
     .hero-cta { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
-    .hero-strip {
-      margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.09);
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem 2.75rem;
+    .trust-band {
+      background: var(--navy-deep); color: #fff;
+      padding: 2.75rem 0 3rem; border-top: 1px solid rgba(255,255,255,0.07);
     }
-    .hero-strip span { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .hero-strip { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.25rem 3.5rem; }
+    .hero-strip span {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 1.25rem; font-weight: 500; letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.9);
+    }
     .hero-strip svg { flex-shrink: 0; }
+    @media (max-width: 700px) {
+      .trust-band { padding: 2rem 0 2.25rem; }
+      .hero-strip { gap: 0.9rem 1.75rem; }
+      .hero-strip span { font-size: 1.0625rem; }
+    }
 
     /* ---------- Section shell ---------- */
     .section { padding: 6.5rem 0; position: relative; }
@@ -486,7 +496,6 @@
       .nav { display: none; }
       .hero { padding: 4.5rem 0 5rem; }
       .section, .cta { padding: 4.5rem 0; }
-      .hero-strip { gap: 0.9rem 1.5rem; }
       .faq summary { padding: 1.35rem 3rem 1.35rem 1.35rem; text-align: left; }
       .faq .answer { padding: 0 1.35rem 1.5rem; text-align: left; }
     }
@@ -530,11 +539,6 @@
         <a href="#contact" class="btn btn-gold btn-lg">Book a Call <span class="arw">&darr;</span></a>
         <a href="mailto:trevorc@aceboundagency.com" class="btn btn-ghost btn-lg">Email Us</a>
       </div>
-      <div class="hero-strip">
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> No success fees</span>
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Month to month</span>
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> One firm per niche, per market</span>
-      </div>
     </div>
   </section>
 
@@ -571,6 +575,17 @@
         <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#education">Education &amp; Training</a></li>
         <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#financial">Financial Services</a></li>
       </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GUARANTEES ============ -->
+  <section class="trust-band">
+    <div class="wrap">
+      <div class="hero-strip">
+        <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> No success fees</span>
+        <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> Month to month</span>
+        <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> One firm per niche, per market</span>
       </div>
     </div>
   </section>
