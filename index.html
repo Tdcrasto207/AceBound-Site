@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AceBound | Seller Origination for Boutique M&A Firms</title>
+  <title>Deal Sourcing for Boutique M&A Firms | AceBound</title>
   <meta name="description" content="Building a predictable pipeline of business owners considering an exit. Without hiring more BD staff, relying on referrals, or paying success fees." />
+  <link rel="canonical" href="https://aceboundagency.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AceBound" />
+  <meta property="og:title" content="Deal Sourcing for Boutique M&amp;A Firms" />
+  <meta property="og:description" content="Building a predictable pipeline of business owners considering an exit. Without hiring more BD staff, relying on referrals, or paying success fees." />
+  <meta property="og:url" content="https://aceboundagency.com/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Deal Sourcing for Boutique M&amp;A Firms" />
+  <meta name="twitter:description" content="A predictable pipeline of business owners considering an exit, without hiring more BD staff or paying success fees." />
+  <meta name="robots" content="index, follow" />
   <script>document.documentElement.className += " js";</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -96,7 +106,23 @@
       mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
     }
     .hero .wrap { position: relative; z-index: 1; }
-    .hero .eyebrow { margin-bottom: 2rem; }
+    .hero-tagline {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .dfy-pill {
+      display: inline-flex; align-items: center;
+      font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--navy); background: var(--accent);
+      padding: 0.45rem 1rem; border-radius: 100px; white-space: nowrap;
+    }
+    .hero-tagline .eyebrow { margin-bottom: 0; }
+    .hero-tagline .eyebrow::before { display: none; }
+    @media (max-width: 700px) {
+      .hero-tagline { gap: 0.85rem; }
+      .dfy-pill { font-size: 0.75rem; letter-spacing: 0.14em; padding: 0.4rem 0.85rem; }
+      .hero-tagline .eyebrow::after { display: none; }
+    }
     .hero h1 {
       font-family: 'DM Serif Display', Georgia, serif; font-weight: 400;
       font-size: clamp(2.5rem, 5.6vw, 4.15rem); line-height: 1.08; letter-spacing: -0.025em;
@@ -232,7 +258,7 @@
       opacity: 0; transition: opacity 0.25s;
     }
     .step-card:hover::before { opacity: 1; }
-    .step-head { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .step-head { display: flex; flex-direction: column; align-items: center; gap: 0.85rem; }
     .step-icon {
       width: 54px; height: 54px; display: grid; place-items: center; flex-shrink: 0;
       border: 1px solid rgba(200,169,110,0.5); border-radius: 50%; background: rgba(200,169,110,0.07);
@@ -467,7 +493,7 @@
     }
     .mq-item a {
       color: inherit; text-decoration: none; cursor: pointer;
-      padding: 0.35rem 0; border-bottom: 1px solid transparent;
+      padding: 0.55rem 0; border-bottom: 1px solid transparent;
       transition: color 0.2s, border-color 0.2s;
     }
     .mq-item a:hover { color: var(--accent); border-bottom-color: var(--accent); }
@@ -482,6 +508,36 @@
       .mq-label { font-size: 0.75rem; margin-bottom: 1.5rem; }
     }
 
+
+    /* ---------- Mobile nav ---------- */
+    .header-actions { display: flex; align-items: center; gap: 0.7rem; }
+    .nav-toggle {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 44px; height: 44px; padding: 11px 10px; flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 2px; cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block; height: 2px; width: 100%; background: #fff; border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    .nav-toggle[aria-expanded="true"] { border-color: var(--accent); }
+    .nav-toggle[aria-expanded="true"] span { background: var(--accent); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav {
+      display: none; flex-direction: column; text-align: left;
+      background: rgba(7,21,44,0.99); border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 1.15rem 1.35rem; font-size: 1.0625rem; color: rgba(255,255,255,0.85);
+      text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-nav a:active { background: rgba(200,169,110,0.1); }
+    .mobile-nav a:last-child { color: var(--accent); font-weight: 600; border-bottom: none; }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 980px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
@@ -494,6 +550,8 @@
     @media (max-width: 700px) {
       .wrap, .header-inner { padding-left: 1.35rem; padding-right: 1.35rem; }
       .nav { display: none; }
+      .nav-toggle { display: flex; }
+      .btn-gold { padding: 0.7rem 1rem; font-size: 0.9375rem; }
       .hero { padding: 4.5rem 0 5rem; }
       .section, .cta { padding: 4.5rem 0; }
       .faq summary { padding: 1.35rem 3rem 1.35rem 1.35rem; text-align: left; }
@@ -525,14 +583,30 @@
         <a href="/niches.html">Niches</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a href="#contact" class="btn btn-gold">Book a Call</a>
+      <div class="header-actions">
+        <a href="#contact" class="btn btn-gold">Book a Call</a>
+        <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <a href="#who">Who It's For</a>
+      <a href="#process">Our System</a>
+      <a href="#engagement">Engagement</a>
+      <a href="/niches.html">Niches</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Book a Call</a>
+    </nav>
   </header>
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="top">
     <div class="wrap">
-      <p class="eyebrow">Seller Origination · Boutique &amp; Middle-Market M&amp;A</p>
+      <div class="hero-tagline">
+        <span class="dfy-pill">Done For You</span>
+        <p class="eyebrow">Deal Sourcing · Boutique &amp; Middle-Market M&amp;A</p>
+      </div>
       <h1>Building a predictable pipeline of business owners <em>considering an exit</em></h1>
       <p class="hero-sub">…Without hiring more BD staff, relying on referrals, or paying success fees.</p>
       <div class="hero-cta">
@@ -621,7 +695,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="#c8a96e"><path d="M8 5v14l11-7z"/></svg>
         </div>
         <span class="video-badge">Video coming soon</span>
-        <p>A short walkthrough of how we build and run seller origination campaigns. In the meantime, the overview of each step is below.</p>
+        <p>A short walkthrough of how we build and run deal sourcing campaigns. In the meantime, the overview of each step is below.</p>
       </div>
     </div>
   </section>
@@ -678,10 +752,10 @@
       <div class="steps stagger">
         <div class="step-card">
           <div class="step-head">
+            <p class="step-num">01</p>
             <span class="step-icon">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
             </span>
-            <p class="step-num">01</p>
           </div>
           <span class="step-tag">Manual</span>
           <h3>Define the Buy Box Accurately</h3>
@@ -690,10 +764,10 @@
 
         <div class="step-card">
           <div class="step-head">
+            <p class="step-num">02</p>
             <span class="step-icon">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
             </span>
-            <p class="step-num">02</p>
           </div>
           <span class="step-tag">Manual</span>
           <h3>Set up Email Outreach Infrastructure</h3>
@@ -702,10 +776,10 @@
 
         <div class="step-card">
           <div class="step-head">
-            <span class="step-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h7M4 18h5"/><circle cx="17" cy="15" r="4"/><path d="m20 18 2.5 2.5"/></svg>
-            </span>
             <p class="step-num">03</p>
+            <span class="step-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(-1.25,-1.25)"><path d="M4 6h10M4 12h7M4 18h5"/><circle cx="17" cy="15" r="4"/><path d="m20 18 2.5 2.5"/></g></svg>
+            </span>
           </div>
           <span class="step-tag">Manual / AI Driven</span>
           <h3>Build Target List</h3>
@@ -714,10 +788,10 @@
 
         <div class="step-card">
           <div class="step-head">
-            <span class="step-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
-            </span>
             <p class="step-num">04</p>
+            <span class="step-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12,12) scale(0.9) translate(-12,-12)"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></g></svg>
+            </span>
           </div>
           <span class="step-tag">Manual / AI Driven</span>
           <h3>Deploy Personalized Campaign</h3>
@@ -726,10 +800,10 @@
 
         <div class="step-card">
           <div class="step-head">
-            <span class="step-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3"/><rect x="8" y="1.5" width="8" height="4" rx="1"/><path d="m8.5 13 2.5 2.5 4.5-5"/></svg>
-            </span>
             <p class="step-num">05</p>
+            <span class="step-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(12,12) scale(0.94) translate(-12,-12.75)"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3"/><rect x="8" y="1.5" width="8" height="4" rx="1"/><path d="m8.5 13 2.5 2.5 4.5-5"/></g></svg>
+            </span>
           </div>
           <span class="step-tag">Recommended to Firm</span>
           <h3>Utilize CTA Item</h3>
@@ -891,6 +965,35 @@
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <script>
+    // Mobile menu
+    (function () {
+      var btn = document.getElementById('navToggle');
+      var panel = document.getElementById('mobileNav');
+      if (!btn || !panel) return;
+      function close() {
+        panel.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      }
+      function open() {
+        panel.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+      }
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        panel.classList.contains('open') ? close() : open();
+      });
+      panel.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') close();
+      });
+      document.addEventListener('click', function (e) {
+        if (panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)) close();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      window.addEventListener('resize', function () { if (window.innerWidth > 860) close(); });
+    })();
+
     (function () {
       var els = document.querySelectorAll('.reveal, .stagger');
       if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -928,6 +1031,21 @@
       }, { passive: true });
       update();
     })();
+  </script>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AceBound",
+    "url": "https://aceboundagency.com/",
+    "description": "Deal sourcing and outbound origination for boutique and middle-market M&A firms.",
+    "email": "trevorc@aceboundagency.com",
+    "telephone": "+1-267-905-4650",
+    "areaServed": "US",
+    "founder": { "@type": "Person", "name": "Trevor Crasto" }
+  }
   </script>
 
 </body>

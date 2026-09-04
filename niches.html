@@ -4,7 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Niche Coverage | AceBound</title>
-  <meta name="description" content="The verticals and niches AceBound builds seller origination buy boxes for, across 118 niches in 13 categories." />
+  <meta name="description" content="The verticals and niches AceBound builds deal sourcing buy boxes for, across 118 niches in 13 categories." />
+  <link rel="canonical" href="https://aceboundagency.com/niches" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AceBound" />
+  <meta property="og:title" content="Niche Coverage | AceBound" />
+  <meta property="og:description" content="118 niches across 13 categories that AceBound builds deal sourcing buy boxes for." />
+  <meta property="og:url" content="https://aceboundagency.com/niches" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Niche Coverage | AceBound" />
+  <meta name="twitter:description" content="118 niches across 13 categories we build deal sourcing buy boxes for." />
+  <meta name="robots" content="index, follow" />
   <script>document.documentElement.className += " js";</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -130,9 +140,54 @@
     .cat.landed .cat-head { animation: catLand 2.2s ease-out both; border-bottom-color: var(--accent); }
     .cat.landed .cat-head h2 { color: var(--accent-dim); }
 
+
+    /* ---------- Mobile nav ---------- */
+    .header-actions { display: flex; align-items: center; gap: 0.7rem; }
+    .nav-toggle {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 44px; height: 44px; padding: 11px 10px; flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 2px; cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block; height: 2px; width: 100%; background: #fff; border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    .nav-toggle[aria-expanded="true"] { border-color: var(--accent); }
+    .nav-toggle[aria-expanded="true"] span { background: var(--accent); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav {
+      display: none; flex-direction: column; text-align: left;
+      background: rgba(7,21,44,0.99); border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 1.15rem 1.35rem; font-size: 1.0625rem; color: rgba(255,255,255,0.85);
+      text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-nav a:active { background: rgba(200,169,110,0.1); }
+    .mobile-nav a:last-child { color: var(--accent); font-weight: 600; border-bottom: none; }
+
+    .jump-select { display: none; padding: 0 1.35rem; }
+    .jump-select select {
+      width: 100%; padding: 0.9rem 1rem; font-family: inherit; font-size: 1rem;
+      color: #fff; background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 2px;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c8a96e' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center;
+    }
+    .jump-select select option { color: #0d1f3c; background: #fff; }
+
     @media (max-width: 800px) {
       .nav { display: none; }
-      .jump { display: none; }
+      .nav-toggle { display: flex; }
+      .btn-gold { padding: 0.7rem 1rem; }
+      .jump-inner { display: none; }
+      .jump-select { display: block; }
+      .jump { padding: 0.85rem 0; }
       .wrap, .header-inner, .jump-inner { padding-left: 1.35rem; padding-right: 1.35rem; }
       .hero { padding: 4rem 0 3.5rem; }
       .cats { padding: 3.5rem 0 4rem; }
@@ -159,8 +214,21 @@
         <a href="/niches.html">Niches</a>
         <a href="/#faq">FAQ</a>
       </nav>
-      <a href="/#contact" class="btn btn-gold">Book a Call</a>
+      <div class="header-actions">
+        <a href="/#contact" class="btn btn-gold">Book a Call</a>
+        <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+      <a href="/">Home</a>
+      <a href="/#who">Who It's For</a>
+      <a href="/#process">Our System</a>
+      <a href="/niches.html">Niches</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Book a Call</a>
+    </nav>
   </header>
 
   <section class="hero">
@@ -177,6 +245,11 @@
   </section>
 
   <nav class="jump" aria-label="Jump to category">
+    <div class="jump-select">
+      <select id="catSelect" aria-label="Jump to a category">
+        <option value="">Jump to a category…</option>
+      </select>
+    </div>
     <div class="jump-inner">
           <a href="#home-building">Home &amp; Building Services</a>
           <a href="#healthcare-providers">Healthcare · Provider Practices</a>
@@ -453,6 +526,61 @@
   </footer>
 
   <script>
+    // Mobile menu
+    (function () {
+      var btn = document.getElementById('navToggle');
+      var panel = document.getElementById('mobileNav');
+      if (!btn || !panel) return;
+      function close() {
+        panel.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      }
+      function open() {
+        panel.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+      }
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        panel.classList.contains('open') ? close() : open();
+      });
+      panel.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') close();
+      });
+      document.addEventListener('click', function (e) {
+        if (panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)) close();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      window.addEventListener('resize', function () { if (window.innerWidth > 860) close(); });
+    })();
+
+    // Populate the mobile category dropdown from the sections themselves
+    (function () {
+      var sel = document.getElementById('catSelect');
+      if (!sel) return;
+      var cats = document.querySelectorAll('.cat');
+      for (var i = 0; i < cats.length; i++) {
+        var h2 = cats[i].querySelector('h2');
+        if (!h2) continue;
+        var o = document.createElement('option');
+        o.value = cats[i].id;
+        o.textContent = h2.textContent.trim();
+        sel.appendChild(o);
+      }
+      sel.addEventListener('change', function () {
+        var el = sel.value && document.getElementById(sel.value);
+        if (!el) return;
+        history.replaceState(null, '', '#' + sel.value);
+        var y = el.getBoundingClientRect().top + window.pageYOffset - 150;
+        window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+        var prev = document.querySelector('.cat.landed');
+        if (prev) prev.classList.remove('landed');
+        void el.offsetWidth;
+        el.classList.add('landed');
+      });
+    })();
+
     // Reveal
     (function () {
       var els = document.querySelectorAll('.reveal');
