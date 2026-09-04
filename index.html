@@ -464,8 +464,13 @@
       font-size: 1.45rem; letter-spacing: -0.01em; color: rgba(255,255,255,0.72);
       transition: color 0.25s;
     }
-    .mq-item a { color: inherit; text-decoration: none; }
-    .mq-item:hover { color: var(--accent); }
+    .mq-item a {
+      color: inherit; text-decoration: none; cursor: pointer;
+      padding: 0.35rem 0; border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .mq-item a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .mq-item a:focus-visible { color: var(--accent); }
     .mq-dot {
       width: 7px; height: 7px; flex-shrink: 0;
       background: var(--accent); transform: rotate(45deg); opacity: 0.75;
@@ -902,100 +907,126 @@
     })();
 
 
-    // Verticals marquee: auto-rolls, but the visitor can drag, swipe or
-    // trackpad-scroll it themselves. Auto-roll resumes once they let go.
+    // Verticals marquee: auto-rolls, and the visitor can drag, swipe,
+    // trackpad-scroll or arrow-key through it. Position is tracked as a float
+    // because element.scrollLeft is rounded to whole pixels by the browser,
+    // so incrementing it by a fraction each frame would never move at all.
     (function () {
       var vp = document.getElementById('mqViewport');
       if (!vp) return;
+      var strip = vp.querySelector('.marquee');
+      var tracks = vp.querySelectorAll('.mq-track');
+      if (!strip || !tracks.length) return;
 
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var SPEED = 0.4;          // px per frame
-      var RESUME_AFTER = 1600;  // ms of stillness before auto-roll resumes
-      var paused = false, resumeTimer = null, half = 0;
+      var PX_PER_SEC = 34;
+      var RESUME_AFTER = 1500;
+      var paused = false, resumeTimer = null, unit = 0, pos = 0;
 
-      function measure() { half = vp.scrollWidth / 2; }
+      // One track's width is the loop distance. Add copies if a single loop
+      // would be narrower than the screen, or the wrap would visibly jump.
+      function measure() {
+        unit = tracks[0].getBoundingClientRect().width;
+        var guard = 0;
+        while (unit > 0 && unit * trackCount() < vp.clientWidth + unit && guard++ < 4) {
+          var clone = tracks[0].cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          strip.appendChild(clone);
+        }
+      }
+      function trackCount() { return strip.querySelectorAll('.mq-track').length; }
+
       measure();
       window.addEventListener('resize', measure);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
-      // Start just off zero so wrapping backwards has somewhere to go.
-      vp.scrollLeft = 1;
+      pos = 0;
+      vp.scrollLeft = 0;
 
-      function wrap() {
-        if (!half) return;
-        if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-        else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
-      }
-
-      function pause() {
-        paused = true;
-        if (resumeTimer) clearTimeout(resumeTimer);
-      }
+      function pause() { paused = true; if (resumeTimer) clearTimeout(resumeTimer); }
       function scheduleResume() {
         if (resumeTimer) clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function () { paused = false; }, RESUME_AFTER);
+        resumeTimer = setTimeout(function () { pos = vp.scrollLeft; paused = false; }, RESUME_AFTER);
       }
 
       if (!reduce) {
-        (function tick() {
-          if (!paused) { vp.scrollLeft += SPEED; wrap(); }
+        var last = null;
+        requestAnimationFrame(function tick(now) {
+          if (last === null) last = now;
+          var dt = Math.min(now - last, 100); // ignore long gaps (tab was hidden)
+          last = now;
+          if (!paused && unit > 0) {
+            pos += PX_PER_SEC * (dt / 1000);
+            if (pos >= unit) pos -= unit;
+            vp.scrollLeft = pos;
+          }
           requestAnimationFrame(tick);
-        })();
+        });
       }
 
-      // Hover holds it still so a name can be read or clicked
+      // Wrap the visitor's own scrolling so it loops too
+      function wrapUser() {
+        if (!unit) return;
+        if (vp.scrollLeft >= unit) vp.scrollLeft -= unit;
+        else if (vp.scrollLeft <= 0) vp.scrollLeft += unit;
+      }
+
       vp.addEventListener('mouseenter', pause);
       vp.addEventListener('mouseleave', scheduleResume);
-
-      // Trackpad / shift-wheel / touch scrolling
-      vp.addEventListener('wheel', function () { pause(); scheduleResume(); }, { passive: true });
+      vp.addEventListener('wheel', function () { pause(); wrapUser(); scheduleResume(); }, { passive: true });
       vp.addEventListener('touchstart', pause, { passive: true });
-      vp.addEventListener('touchend', scheduleResume, { passive: true });
+      vp.addEventListener('touchend', function () { wrapUser(); scheduleResume(); }, { passive: true });
 
-      // Mouse drag to scroll
-      var down = false, startX = 0, startScroll = 0, moved = 0;
+      // Mouse drag. Pointer capture is only taken once a real drag starts,
+      // otherwise it would steal the click from the category link.
+      var down = false, startX = 0, startScroll = 0, moved = 0, capturing = false;
       vp.addEventListener('pointerdown', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        down = true; moved = 0;
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        down = true; moved = 0; capturing = false;
         startX = e.clientX; startScroll = vp.scrollLeft;
-        vp.classList.add('dragging');
         pause();
-        try { vp.setPointerCapture(e.pointerId); } catch (err) {}
       });
       vp.addEventListener('pointermove', function (e) {
         if (!down) return;
         var dx = e.clientX - startX;
         moved = Math.max(moved, Math.abs(dx));
-        vp.scrollLeft = startScroll - dx;
-        wrap();
+        if (!capturing && moved > 4) {
+          capturing = true;
+          vp.classList.add('dragging');
+          try { vp.setPointerCapture(e.pointerId); } catch (err) {}
+        }
+        if (capturing) { vp.scrollLeft = startScroll - dx; wrapUser(); }
       });
       function endDrag(e) {
         if (!down) return;
         down = false;
-        vp.classList.remove('dragging');
-        try { vp.releasePointerCapture(e.pointerId); } catch (err) {}
+        if (capturing) {
+          vp.classList.remove('dragging');
+          try { vp.releasePointerCapture(e.pointerId); } catch (err) {}
+        }
         scheduleResume();
       }
       vp.addEventListener('pointerup', endDrag);
       vp.addEventListener('pointercancel', endDrag);
 
-      // A drag should not count as a click on a category link
+      // Only swallow the click if it was actually a drag
       vp.addEventListener('click', function (e) {
-        if (moved > 5) { e.preventDefault(); e.stopPropagation(); }
+        if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
+        moved = 0;
       }, true);
 
-      // Keyboard: arrows nudge it when the strip has focus
+      // Keyboard access
       vp.tabIndex = 0;
       vp.addEventListener('keydown', function (e) {
         if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
         e.preventDefault();
         pause();
-        vp.scrollLeft += (e.key === 'ArrowRight' ? 120 : -120);
-        wrap();
+        vp.scrollLeft += (e.key === 'ArrowRight' ? 140 : -140);
+        wrapUser();
         scheduleResume();
       });
-      vp.addEventListener('focus', pause);
-      vp.addEventListener('blur', scheduleResume);
+      vp.addEventListener('focusin', pause);
+      vp.addEventListener('focusout', scheduleResume);
     })();
 
     // Scroll progress bar + condensing header
