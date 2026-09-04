@@ -420,6 +420,51 @@
     .term { transition: transform 0.25s, border-color 0.25s, background 0.25s; }
     .term:hover { transform: translateY(-3px); border-color: rgba(200,169,110,0.65); background: rgba(200,169,110,0.09); }
 
+
+    /* ---------- Verticals marquee ---------- */
+    .marquee-band {
+      background: var(--navy-deep); color: #fff;
+      padding: 3rem 0 3.25rem; overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .mq-label {
+      font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.38);
+      margin-bottom: 2rem;
+    }
+    .mq-label a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .mq-label a:hover { color: var(--accent); }
+    .marquee {
+      display: flex; width: max-content;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    @keyframes mqScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .js .marquee { animation: mqScroll 48s linear infinite; }
+    .js .marquee:hover { animation-play-state: paused; }
+    .mq-track {
+      display: flex; align-items: center; list-style: none;
+      flex-shrink: 0; margin: 0; padding: 0;
+    }
+    .mq-item {
+      display: inline-flex; align-items: center; gap: 1.75rem;
+      white-space: nowrap; padding-right: 1.75rem;
+      font-family: 'DM Serif Display', Georgia, serif; font-weight: 400;
+      font-size: 1.45rem; letter-spacing: -0.01em; color: rgba(255,255,255,0.72);
+      transition: color 0.25s;
+    }
+    .mq-item a { color: inherit; text-decoration: none; }
+    .mq-item:hover { color: var(--accent); }
+    .mq-dot {
+      width: 7px; height: 7px; flex-shrink: 0;
+      background: var(--accent); transform: rotate(45deg); opacity: 0.75;
+    }
+    @media (max-width: 700px) {
+      .marquee-band { padding: 2.25rem 0 2.5rem; }
+      .mq-item { font-size: 1.15rem; gap: 1.25rem; padding-right: 1.25rem; }
+      .mq-label { font-size: 0.75rem; margin-bottom: 1.5rem; }
+    }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 980px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
@@ -442,6 +487,9 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; animation: none !important; }
       .js .reveal, .js .stagger > * { opacity: 1 !important; transform: none !important; }
+      .marquee { width: auto; flex-wrap: wrap; justify-content: center; -webkit-mask-image: none; mask-image: none; }
+      .mq-track[aria-hidden="true"] { display: none; }
+      .mq-track { flex-wrap: wrap; justify-content: center; gap: 0.5rem 0; }
       .js .hero .wrap > * { opacity: 1 !important; transform: none !important; }
       .progress { display: none; }
     }
@@ -457,7 +505,7 @@
       <nav class="nav">
         <a href="#who">Who It's For</a>
         <a href="#process">Our System</a>
-        <a href="#engagement">Engagement</a>
+        <a href="/niches.html">Niches</a>
         <a href="#faq">FAQ</a>
       </nav>
       <a href="#contact" class="btn btn-gold">Book a Call</a>
@@ -479,6 +527,43 @@
         <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Month to month</span>
         <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> One firm per niche, per market</span>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ VERTICALS MARQUEE ============ -->
+  <section class="marquee-band" id="verticals" aria-label="Verticals we cover">
+    <p class="mq-label"><a href="/niches.html">Verticals we build buy boxes for &rarr;</a></p>
+    <div class="marquee">
+      <ul class="mq-track">
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#home-building">Home &amp; Building Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#healthcare-providers">Healthcare · Provider Practices</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#healthcare-services">Healthcare · Services &amp; Products</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#business-services">Business &amp; Professional Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#industrial">Industrial &amp; Manufacturing</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#transportation">Transportation &amp; Logistics</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#auto">Auto</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#consumer">Consumer Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#food-hospitality">Food &amp; Hospitality</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#construction-realestate">Construction &amp; Real Estate Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#technology">Technology</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#education">Education &amp; Training</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#financial">Financial Services</a></li>
+      </ul>
+      <ul class="mq-track" aria-hidden="true">
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#home-building">Home &amp; Building Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#healthcare-providers">Healthcare · Provider Practices</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#healthcare-services">Healthcare · Services &amp; Products</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#business-services">Business &amp; Professional Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#industrial">Industrial &amp; Manufacturing</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#transportation">Transportation &amp; Logistics</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#auto">Auto</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#consumer">Consumer Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#food-hospitality">Food &amp; Hospitality</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#construction-realestate">Construction &amp; Real Estate Services</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#technology">Technology</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#education">Education &amp; Training</a></li>
+        <li class="mq-item"><span class="mq-dot"></span><a href="/niches.html#financial">Financial Services</a></li>
+      </ul>
     </div>
   </section>
 
@@ -772,7 +857,7 @@
       <nav class="footer-nav">
         <a href="#who">Who It's For</a>
         <a href="#process">Our System</a>
-        <a href="#engagement">Engagement</a>
+        <a href="/niches.html">Niches</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Book a Call</a>
       </nav>

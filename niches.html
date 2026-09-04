@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Niche Coverage | AceBound</title>
+  <meta name="description" content="The verticals and niches AceBound builds seller origination buy boxes for, across 118 niches in 13 categories." />
+  <script>document.documentElement.className += " js";</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1f3c; --navy-deep: #07152c; --navy-mid: #132848;
+      --off-white: #f7f6f3; --muted: #6b7280; --body: #3d4756; --rule: #e5e2da;
+      --accent: #c8a96e; --accent-lt: #e2cb9c; --accent-dim: #a98d55;
+      --maxw: 1120px;
+      --shadow-sm: 0 1px 2px rgba(13,31,60,0.04), 0 4px 16px rgba(13,31,60,0.05);
+      --shadow-md: 0 2px 4px rgba(13,31,60,0.05), 0 12px 32px rgba(13,31,60,0.09);
+    }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; text-align: center; }
+    a { color: inherit; }
+    ::selection { background: var(--accent); color: var(--navy); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+
+    .js .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    .progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--accent-dim), var(--accent-lt)); z-index: 100; transition: width 0.1s linear; pointer-events: none; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(7,21,44,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.3s, box-shadow 0.3s; }
+    .site-header.scrolled { background: rgba(7,21,44,0.98); box-shadow: 0 6px 26px rgba(0,0,0,0.32); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1rem 2rem; max-width: var(--maxw); margin: 0 auto; transition: padding 0.3s; }
+    .site-header.scrolled .header-inner { padding-top: 0.65rem; padding-bottom: 0.65rem; }
+    .wordmark { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.55rem; }
+    .wordmark .mark { width: 9px; height: 9px; background: var(--accent); transform: rotate(45deg); display: inline-block; }
+    .nav { display: flex; align-items: center; gap: 2.25rem; }
+    .nav a { font-size: 0.875rem; color: rgba(255,255,255,0.7); text-decoration: none; position: relative; transition: color 0.2s; }
+    .nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+    .nav a:hover { color: #fff; }
+    .nav a:hover::after { width: 100%; }
+
+    .btn { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.875rem; font-weight: 600; text-decoration: none; padding: 0.75rem 1.35rem; border-radius: 2px; position: relative; overflow: hidden; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+    .btn::before { content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.38), transparent); transform: skewX(-18deg); transition: left 0.55s ease; }
+    .btn:hover::before { left: 130%; }
+    .btn-gold { background: var(--accent); color: var(--navy); border: 1px solid var(--accent); }
+    .btn-gold:hover { background: var(--accent-lt); border-color: var(--accent-lt); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(200,169,110,0.28); }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-lg { padding: 1rem 1.9rem; font-size: 0.9375rem; }
+
+    .eyebrow { display: inline-flex; align-items: center; gap: 0.9rem; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent); }
+    .eyebrow::before, .eyebrow::after { content: ""; width: 60px; height: 1px; background: rgba(200,169,110,0.55); }
+
+    /* Hero */
+    .hero { background: radial-gradient(ellipse 900px 460px at 50% 10%, #17325c 0%, var(--navy) 45%, var(--navy-deep) 100%); color: #fff; padding: 6rem 0 5rem; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%); }
+    .hero .wrap { position: relative; z-index: 1; }
+    .hero .eyebrow { margin-bottom: 1.75rem; }
+    .hero h1 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; font-size: clamp(2.2rem, 4.6vw, 3.4rem); line-height: 1.1; letter-spacing: -0.025em; max-width: 20ch; margin: 0 auto 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 1.0625rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.72); max-width: 54ch; margin: 0 auto 2.5rem; }
+
+    /* Search */
+    .search-wrap { position: relative; max-width: 520px; margin: 0 auto; }
+    .search-wrap svg { position: absolute; left: 1.1rem; top: 50%; transform: translateY(-50%); pointer-events: none; }
+    #search {
+      width: 100%; padding: 1rem 1.1rem 1rem 3rem; font-family: inherit; font-size: 1rem;
+      color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 2px; outline: none; transition: border-color 0.2s, background 0.2s;
+    }
+    #search::placeholder { color: rgba(255,255,255,0.4); }
+    #search:focus { border-color: var(--accent); background: rgba(255,255,255,0.09); }
+    .search-status { margin-top: 1rem; font-size: 0.875rem; color: rgba(255,255,255,0.5); min-height: 1.4em; }
+
+    /* Category jump bar */
+    .jump { background: var(--navy-deep); border-bottom: 1px solid rgba(255,255,255,0.07); padding: 1.1rem 0; position: sticky; top: 61px; z-index: 40; }
+    .jump-inner { display: flex; gap: 0.5rem 1.6rem; flex-wrap: wrap; justify-content: center; max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+    .jump a { font-size: 0.8125rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+    .jump a:hover { color: var(--accent); }
+
+    /* Categories */
+    .cats { padding: 5rem 0 6rem; }
+    .cat { margin-bottom: 4rem; scroll-margin-top: 130px; }
+    .cat.hidden { display: none; }
+    .cat-head { display: flex; align-items: baseline; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--rule); }
+    .cat-head h2 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; font-size: clamp(1.6rem, 2.8vw, 2.1rem); line-height: 1.2; letter-spacing: -0.015em; color: var(--navy); }
+    .cat-count { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dim); white-space: nowrap; }
+    .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
+    .chip {
+      background: #fff; border: 1px solid var(--rule); border-radius: 100px;
+      padding: 0.6rem 1.25rem; font-size: 0.9688rem; font-weight: 400; color: var(--body);
+      box-shadow: var(--shadow-sm); transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s, background 0.2s;
+    }
+    .chip:hover { transform: translateY(-3px); border-color: rgba(200,169,110,0.65); color: var(--navy); box-shadow: var(--shadow-md); background: #fffdf8; }
+    .chip.hidden { display: none; }
+    .chip.hit { border-color: var(--accent); background: rgba(200,169,110,0.12); color: var(--navy); font-weight: 500; }
+    .no-results { display: none; padding: 3rem 1rem; font-size: 1.0625rem; font-weight: 300; color: var(--body); }
+    .no-results.show { display: block; }
+    .no-results b { font-weight: 500; color: var(--navy); }
+
+    /* Closing */
+    .cta { background: radial-gradient(ellipse 800px 380px at 50% 0%, #17325c 0%, var(--navy) 50%, var(--navy-deep) 100%); color: #fff; padding: 6rem 0; }
+    .cta h2 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.75rem); line-height: 1.16; letter-spacing: -0.02em; color: #fff; max-width: 20ch; margin: 0 auto 1.5rem; }
+    .cta p { font-size: 1.0625rem; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.72); max-width: 52ch; margin: 0 auto 2.5rem; }
+    .cta-actions { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 2.25rem; font-size: 0.8125rem; color: rgba(255,255,255,0.45); }
+
+    /* Footer */
+    .footer { background: var(--navy-deep); color: #fff; padding: 3.5rem 0 2.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-contact a { display: block; width: fit-content; margin: 0 auto; font-family: 'DM Serif Display', Georgia, serif; font-size: 1.3rem; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.2rem; transition: border-color 0.2s, color 0.2s; }
+    .footer-contact a + a { margin-top: 0.9rem; }
+    .footer-contact a:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.75rem; margin-top: 2.5rem; }
+    .footer-nav a { font-size: 0.9375rem; font-weight: 300; color: rgba(255,255,255,0.55); text-decoration: none; position: relative; transition: color 0.2s; }
+    .footer-nav a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+    .footer-nav a:hover { color: var(--accent); }
+    .footer-nav a:hover::after { width: 100%; }
+    .footer-bottom { margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 800px) {
+      .nav { display: none; }
+      .jump { display: none; }
+      .wrap, .header-inner, .jump-inner { padding-left: 1.35rem; padding-right: 1.35rem; }
+      .hero { padding: 4rem 0 3.5rem; }
+      .cats { padding: 3.5rem 0 4rem; }
+      .cta { padding: 4.5rem 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+      .progress { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress" id="progress"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="wordmark"><span class="mark"></span>AceBound</a>
+      <nav class="nav">
+        <a href="/#who">Who It's For</a>
+        <a href="/#process">Our System</a>
+        <a href="/niches.html">Niches</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a href="/#contact" class="btn btn-gold">Book a Call</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Coverage</p>
+      <h1>The niches we build <em>buy boxes</em> for</h1>
+      <p class="hero-sub">118 niches across 13 categories. If your buy box sits in one of these, we can define the universe, verify the decision makers, and run the outreach under your firm's name.</p>
+      <div class="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search a niche, e.g. dental, HVAC, staffing" autocomplete="off" aria-label="Search niches" />
+      </div>
+      <p class="search-status" id="status"></p>
+    </div>
+  </section>
+
+  <nav class="jump" aria-label="Jump to category">
+    <div class="jump-inner">
+          <a href="#home-building">Home &amp; Building Services</a>
+          <a href="#healthcare-providers">Healthcare · Provider Practices</a>
+          <a href="#healthcare-services">Healthcare · Services &amp; Products</a>
+          <a href="#business-services">Business &amp; Professional Services</a>
+          <a href="#industrial">Industrial &amp; Manufacturing</a>
+          <a href="#transportation">Transportation &amp; Logistics</a>
+          <a href="#auto">Auto</a>
+          <a href="#consumer">Consumer Services</a>
+          <a href="#food-hospitality">Food &amp; Hospitality</a>
+          <a href="#construction-realestate">Construction &amp; Real Estate Services</a>
+          <a href="#technology">Technology</a>
+          <a href="#education">Education &amp; Training</a>
+          <a href="#financial">Financial Services</a>
+    </div>
+  </nav>
+
+  <div class="cats">
+    <div class="wrap">
+      <section class="cat reveal" id="home-building" data-cat="home &amp; building services">
+        <div class="cat-head">
+          <h2>Home &amp; Building Services</h2>
+          <span class="cat-count">18 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="hvac">HVAC</li>
+          <li class="chip" data-niche="plumbing">Plumbing</li>
+          <li class="chip" data-niche="electrical">Electrical</li>
+          <li class="chip" data-niche="roofing">Roofing</li>
+          <li class="chip" data-niche="landscaping / lawn care">Landscaping / lawn care</li>
+          <li class="chip" data-niche="pest control">Pest control</li>
+          <li class="chip" data-niche="garage door">Garage door</li>
+          <li class="chip" data-niche="pool service">Pool service</li>
+          <li class="chip" data-niche="fire protection &amp; sprinkler">Fire protection &amp; sprinkler</li>
+          <li class="chip" data-niche="elevator service">Elevator service</li>
+          <li class="chip" data-niche="septic &amp; drain">Septic &amp; drain</li>
+          <li class="chip" data-niche="restoration (water/fire/mold)">Restoration (water/fire/mold)</li>
+          <li class="chip" data-niche="security &amp; alarm monitoring">Security &amp; alarm monitoring</li>
+          <li class="chip" data-niche="window &amp; door">Window &amp; door</li>
+          <li class="chip" data-niche="flooring">Flooring</li>
+          <li class="chip" data-niche="paving &amp; asphalt">Paving &amp; asphalt</li>
+          <li class="chip" data-niche="tree service">Tree service</li>
+          <li class="chip" data-niche="chimney &amp; duct cleaning">Chimney &amp; duct cleaning</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="healthcare-providers" data-cat="healthcare · provider practices">
+        <div class="cat-head">
+          <h2>Healthcare · Provider Practices</h2>
+          <span class="cat-count">17 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="dental">Dental</li>
+          <li class="chip" data-niche="veterinary">Veterinary</li>
+          <li class="chip" data-niche="optometry / ophthalmology">Optometry / ophthalmology</li>
+          <li class="chip" data-niche="dermatology">Dermatology</li>
+          <li class="chip" data-niche="physical therapy">Physical therapy</li>
+          <li class="chip" data-niche="orthopedics">Orthopedics</li>
+          <li class="chip" data-niche="anesthesia">Anesthesia</li>
+          <li class="chip" data-niche="radiology">Radiology</li>
+          <li class="chip" data-niche="behavioral health / aba">Behavioral health / ABA</li>
+          <li class="chip" data-niche="home health &amp; hospice">Home health &amp; hospice</li>
+          <li class="chip" data-niche="non-medical home care">Non-medical home care</li>
+          <li class="chip" data-niche="med spas">Med spas</li>
+          <li class="chip" data-niche="audiology">Audiology</li>
+          <li class="chip" data-niche="podiatry">Podiatry</li>
+          <li class="chip" data-niche="fertility">Fertility</li>
+          <li class="chip" data-niche="urgent care">Urgent care</li>
+          <li class="chip" data-niche="primary care groups">Primary care groups</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="healthcare-services" data-cat="healthcare · services &amp; products">
+        <div class="cat-head">
+          <h2>Healthcare · Services &amp; Products</h2>
+          <span class="cat-count">7 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="medical device distribution">Medical device distribution</li>
+          <li class="chip" data-niche="dental &amp; medical supply">Dental &amp; medical supply</li>
+          <li class="chip" data-niche="dme (durable medical equipment)">DME (durable medical equipment)</li>
+          <li class="chip" data-niche="pharmacy">Pharmacy</li>
+          <li class="chip" data-niche="lab services">Lab services</li>
+          <li class="chip" data-niche="revenue cycle management">Revenue cycle management</li>
+          <li class="chip" data-niche="healthcare it">Healthcare IT</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="business-services" data-cat="business &amp; professional services">
+        <div class="cat-head">
+          <h2>Business &amp; Professional Services</h2>
+          <span class="cat-count">14 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="it managed services (msps)">IT managed services (MSPs)</li>
+          <li class="chip" data-niche="cybersecurity">Cybersecurity</li>
+          <li class="chip" data-niche="accounting &amp; bookkeeping">Accounting &amp; bookkeeping</li>
+          <li class="chip" data-niche="insurance agencies">Insurance agencies</li>
+          <li class="chip" data-niche="wealth management / rias">Wealth management / RIAs</li>
+          <li class="chip" data-niche="staffing &amp; recruiting">Staffing &amp; recruiting</li>
+          <li class="chip" data-niche="marketing agencies">Marketing agencies</li>
+          <li class="chip" data-niche="commercial cleaning / janitorial">Commercial cleaning / janitorial</li>
+          <li class="chip" data-niche="security guard services">Security guard services</li>
+          <li class="chip" data-niche="facilities management">Facilities management</li>
+          <li class="chip" data-niche="waste hauling">Waste hauling</li>
+          <li class="chip" data-niche="commercial laundry &amp; linen">Commercial laundry &amp; linen</li>
+          <li class="chip" data-niche="payroll &amp; hr services">Payroll &amp; HR services</li>
+          <li class="chip" data-niche="title &amp; escrow">Title &amp; escrow</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="industrial" data-cat="industrial &amp; manufacturing">
+        <div class="cat-head">
+          <h2>Industrial &amp; Manufacturing</h2>
+          <span class="cat-count">12 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="machine shops / precision manufacturing">Machine shops / precision manufacturing</li>
+          <li class="chip" data-niche="contract manufacturing">Contract manufacturing</li>
+          <li class="chip" data-niche="welding &amp; fabrication">Welding &amp; fabrication</li>
+          <li class="chip" data-niche="powder coating &amp; finishing">Powder coating &amp; finishing</li>
+          <li class="chip" data-niche="industrial distribution">Industrial distribution</li>
+          <li class="chip" data-niche="equipment rental">Equipment rental</li>
+          <li class="chip" data-niche="signage">Signage</li>
+          <li class="chip" data-niche="commercial printing">Commercial printing</li>
+          <li class="chip" data-niche="packaging">Packaging</li>
+          <li class="chip" data-niche="tooling &amp; die">Tooling &amp; die</li>
+          <li class="chip" data-niche="aerospace components">Aerospace components</li>
+          <li class="chip" data-niche="plastics &amp; injection molding">Plastics &amp; injection molding</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="transportation" data-cat="transportation &amp; logistics">
+        <div class="cat-head">
+          <h2>Transportation &amp; Logistics</h2>
+          <span class="cat-count">7 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="trucking &amp; freight">Trucking &amp; freight</li>
+          <li class="chip" data-niche="last-mile delivery">Last-mile delivery</li>
+          <li class="chip" data-niche="warehousing &amp; 3pl">Warehousing &amp; 3PL</li>
+          <li class="chip" data-niche="fleet maintenance">Fleet maintenance</li>
+          <li class="chip" data-niche="towing">Towing</li>
+          <li class="chip" data-niche="moving &amp; storage">Moving &amp; storage</li>
+          <li class="chip" data-niche="bus &amp; shuttle">Bus &amp; shuttle</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="auto" data-cat="auto">
+        <div class="cat-head">
+          <h2>Auto</h2>
+          <span class="cat-count">6 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="auto repair &amp; collision">Auto repair &amp; collision</li>
+          <li class="chip" data-niche="tire shops">Tire shops</li>
+          <li class="chip" data-niche="car washes">Car washes</li>
+          <li class="chip" data-niche="auto glass">Auto glass</li>
+          <li class="chip" data-niche="dealership groups">Dealership groups</li>
+          <li class="chip" data-niche="truck &amp; fleet service">Truck &amp; fleet service</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="consumer" data-cat="consumer services">
+        <div class="cat-head">
+          <h2>Consumer Services</h2>
+          <span class="cat-count">9 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="self-storage">Self-storage</li>
+          <li class="chip" data-niche="funeral homes &amp; cemeteries">Funeral homes &amp; cemeteries</li>
+          <li class="chip" data-niche="childcare &amp; daycare">Childcare &amp; daycare</li>
+          <li class="chip" data-niche="fitness &amp; gyms">Fitness &amp; gyms</li>
+          <li class="chip" data-niche="salons &amp; med spas">Salons &amp; med spas</li>
+          <li class="chip" data-niche="dry cleaning">Dry cleaning</li>
+          <li class="chip" data-niche="driving schools">Driving schools</li>
+          <li class="chip" data-niche="tutoring &amp; test prep">Tutoring &amp; test prep</li>
+          <li class="chip" data-niche="pet grooming &amp; boarding">Pet grooming &amp; boarding</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="food-hospitality" data-cat="food &amp; hospitality">
+        <div class="cat-head">
+          <h2>Food &amp; Hospitality</h2>
+          <span class="cat-count">6 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="franchise restaurant portfolios">Franchise restaurant portfolios</li>
+          <li class="chip" data-niche="food distribution">Food distribution</li>
+          <li class="chip" data-niche="specialty food manufacturing">Specialty food manufacturing</li>
+          <li class="chip" data-niche="catering">Catering</li>
+          <li class="chip" data-niche="hotels">Hotels</li>
+          <li class="chip" data-niche="breweries &amp; beverage">Breweries &amp; beverage</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="construction-realestate" data-cat="construction &amp; real estate services">
+        <div class="cat-head">
+          <h2>Construction &amp; Real Estate Services</h2>
+          <span class="cat-count">7 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="specialty trade contractors">Specialty trade contractors</li>
+          <li class="chip" data-niche="civil &amp; site work">Civil &amp; site work</li>
+          <li class="chip" data-niche="utility contracting">Utility contracting</li>
+          <li class="chip" data-niche="property management">Property management</li>
+          <li class="chip" data-niche="facility services">Facility services</li>
+          <li class="chip" data-niche="engineering &amp; surveying">Engineering &amp; surveying</li>
+          <li class="chip" data-niche="environmental services">Environmental services</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="technology" data-cat="technology">
+        <div class="cat-head">
+          <h2>Technology</h2>
+          <span class="cat-count">6 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="vertical saas">Vertical SaaS</li>
+          <li class="chip" data-niche="managed hosting">Managed hosting</li>
+          <li class="chip" data-niche="telecom &amp; voip">Telecom &amp; VoIP</li>
+          <li class="chip" data-niche="data centers">Data centers</li>
+          <li class="chip" data-niche="it staffing">IT staffing</li>
+          <li class="chip" data-niche="e-commerce aggregation">E-commerce aggregation</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="education" data-cat="education &amp; training">
+        <div class="cat-head">
+          <h2>Education &amp; Training</h2>
+          <span class="cat-count">4 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="trade schools">Trade schools</li>
+          <li class="chip" data-niche="early childhood education">Early childhood education</li>
+          <li class="chip" data-niche="corporate training">Corporate training</li>
+          <li class="chip" data-niche="certification &amp; compliance training">Certification &amp; compliance training</li>
+        </ul>
+      </section>
+      <section class="cat reveal" id="financial" data-cat="financial services">
+        <div class="cat-head">
+          <h2>Financial Services</h2>
+          <span class="cat-count">5 niches</span>
+        </div>
+        <ul class="chips">
+          <li class="chip" data-niche="insurance brokerages">Insurance brokerages</li>
+          <li class="chip" data-niche="debt collection">Debt collection</li>
+          <li class="chip" data-niche="specialty lending">Specialty lending</li>
+          <li class="chip" data-niche="tax prep">Tax prep</li>
+          <li class="chip" data-niche="bookkeeping franchises">Bookkeeping franchises</li>
+        </ul>
+      </section>
+      <p class="no-results" id="noresults">No niche matches <b id="noterm"></b>. That doesn't mean we can't cover it. <a href="/#contact" style="color:var(--accent-dim);">Ask on a call</a> and we'll tell you straight whether the universe is deep enough.</p>
+    </div>
+  </div>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Is your niche still open?</h2>
+      <p>We work with one firm per niche, per state or metro. Once a market is locked it's off the board until that engagement ends.</p>
+      <div class="cta-actions">
+        <a href="/#contact" class="btn btn-gold btn-lg">Book a Call</a>
+        <a href="mailto:trevorc@aceboundagency.com" class="btn btn-ghost btn-lg">Email Us</a>
+      </div>
+      <p class="cta-note">No success fees. Month to month. One firm per niche, per market.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-contact">
+        <a href="mailto:trevorc@aceboundagency.com">trevorc@aceboundagency.com</a>
+        <a href="tel:2679054650">267-905-4650</a>
+      </div>
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/#who">Who It's For</a>
+        <a href="/#process">Our System</a>
+        <a href="/niches.html">Niches</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#contact">Book a Call</a>
+      </nav>
+      <p class="footer-bottom">&copy; 2026 AceBound. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -50px 0px', threshold: 0.05 });
+      els.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 1800);
+    })();
+
+    // Progress bar + header
+    (function () {
+      var bar = document.getElementById('progress');
+      var header = document.querySelector('.site-header');
+      var ticking = false;
+      function update() {
+        var st = window.scrollY || document.documentElement.scrollTop;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        if (bar) bar.style.width = (max > 0 ? (st / max) * 100 : 0) + '%';
+        if (header) header.classList.toggle('scrolled', st > 40);
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // Live search
+    (function () {
+      var input = document.getElementById('search');
+      var status = document.getElementById('status');
+      var noresults = document.getElementById('noresults');
+      var noterm = document.getElementById('noterm');
+      var cats = [].slice.call(document.querySelectorAll('.cat'));
+      var chips = [].slice.call(document.querySelectorAll('.chip'));
+      if (!input) return;
+
+      function run() {
+        var q = input.value.trim().toLowerCase();
+        if (!q) {
+          chips.forEach(function (c) { c.classList.remove('hidden', 'hit'); });
+          cats.forEach(function (c) { c.classList.remove('hidden'); });
+          noresults.classList.remove('show');
+          status.textContent = '';
+          return;
+        }
+        var hits = 0;
+        cats.forEach(function (cat) {
+          var catName = cat.getAttribute('data-cat') || '';
+          var catMatch = catName.indexOf(q) !== -1;
+          var shown = 0;
+          [].slice.call(cat.querySelectorAll('.chip')).forEach(function (chip) {
+            var match = catMatch || chip.getAttribute('data-niche').indexOf(q) !== -1;
+            chip.classList.toggle('hidden', !match);
+            chip.classList.toggle('hit', match && !catMatch);
+            if (match) shown++;
+          });
+          cat.classList.toggle('hidden', shown === 0);
+          hits += shown;
+        });
+        noresults.classList.toggle('show', hits === 0);
+        noterm.textContent = '"' + input.value.trim() + '"';
+        status.textContent = hits === 0
+          ? ''
+          : hits + (hits === 1 ? ' niche matches ' : ' niches match ') + '"' + input.value.trim() + '"';
+      }
+
+      input.addEventListener('input', run);
+      input.addEventListener('search', run);
+    })();
+  </script>
+
+</body>
+</html>

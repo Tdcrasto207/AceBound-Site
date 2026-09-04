@@ -3,3 +3,9 @@
 [build]
   publish = "."
   command = ""
+
+# Clean URL for the niches page
+[[redirects]]
+  from = "/niches"
+  to = "/niches.html"
+  status = 200
