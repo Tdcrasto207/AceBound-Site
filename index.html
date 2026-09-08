@@ -192,29 +192,15 @@
     /* ---------- Video ---------- */
     .video-frame {
       position: relative; border: 1px solid rgba(200,169,110,0.28); border-radius: 3px;
-      background: linear-gradient(155deg, #14294a 0%, #0b1c37 60%, #0a1830 100%);
-      aspect-ratio: 16 / 9; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 1.5rem; padding: 2rem;
+      background: #0a1830; overflow: hidden;
       box-shadow: 0 30px 70px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
-      overflow: hidden;
     }
-    .video-frame::before {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(circle 380px at 50% 42%, rgba(200,169,110,0.11), transparent 70%);
+    .video-frame wistia-player { display: block; width: 100%; }
+    /* Wistia's own blurred placeholder while the player script boots */
+    wistia-player[media-id='qgrvrw21j5']:not(:defined) {
+      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/qgrvrw21j5/swatch');
+      display: block; filter: blur(5px); padding-top: 56.25%;
     }
-    .play-btn {
-      position: relative; width: 78px; height: 78px; border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.6); display: grid; place-items: center;
-      background: rgba(200,169,110,0.08);
-    }
-    .play-btn::after { content: ""; position: absolute; inset: -12px; border-radius: 50%; border: 1px solid rgba(200,169,110,0.22); }
-    .play-btn svg { margin-left: 4px; }
-    .video-badge {
-      position: relative; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent);
-      border: 1px solid rgba(200,169,110,0.45); padding: 0.5rem 1.1rem; border-radius: 2px;
-    }
-    .video-frame p { position: relative; font-size: 0.9375rem; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 44ch; }
 
     /* ---------- Card grid ---------- */
     .grid { display: grid; gap: 1.5rem; }
@@ -425,15 +411,6 @@
     .card-dark:hover::after { opacity: 1; }
 
     /* ---------- Play button pulse ---------- */
-    @keyframes ringPulse {
-      0%   { transform: scale(1);    opacity: 0.55; }
-      70%  { transform: scale(1.35); opacity: 0; }
-      100% { transform: scale(1.35); opacity: 0; }
-    }
-    .js .play-btn::after { animation: ringPulse 2.8s ease-out infinite; }
-    .play-btn { transition: transform 0.3s, background 0.3s, border-color 0.3s; }
-    .video-frame:hover .play-btn { transform: scale(1.06); background: rgba(200,169,110,0.16); border-color: var(--accent); }
-
     /* ---------- FAQ open animation ---------- */
     @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
     .js .faq details[open] .answer { animation: faqIn 0.35s ease both; }
@@ -691,11 +668,7 @@
         <h2>How the DFY Outreach system works in detail</h2>
       </div>
       <div class="video-frame reveal">
-        <div class="play-btn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#c8a96e"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <span class="video-badge">Video coming soon</span>
-        <p>A short walkthrough of how we build and run deal sourcing campaigns. In the meantime, the overview of each step is below.</p>
+        <wistia-player media-id="qgrvrw21j5" aspect="1.7777777777777777"></wistia-player>
       </div>
     </div>
   </section>
@@ -963,6 +936,9 @@
   </footer>
 
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <script src="https://fast.wistia.com/player.js" async></script>
+  <script src="https://fast.wistia.com/embed/qgrvrw21j5.js" async type="module"></script>
 
   <script>
     // Mobile menu
