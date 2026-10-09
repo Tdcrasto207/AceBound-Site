@@ -11,3 +11,7 @@ desktop.ini
 # Editor
 .vscode/
 .idea/
+
+# Smartlead reply exports contain lead data; never commit them
+smartlead-replies-*.md
+smartlead-replies-*.csv

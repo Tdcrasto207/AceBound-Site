@@ -9,3 +9,10 @@
   from = "/niches"
   to = "/niches.html"
   status = 200
+
+# Internal scripts live in /tools; don't serve them on the website
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true
