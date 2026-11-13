@@ -4,8 +4,13 @@
   publish = "."
   command = ""
 
-# Clean URL for the niches page
+# Clean URLs
 [[redirects]]
   from = "/niches"
   to = "/niches.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
   status = 200
