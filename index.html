@@ -263,8 +263,11 @@
     }
     .tl-step { display: grid; grid-template-columns: 1fr 76px 1fr; align-items: center; position: relative; }
     .tl-step + .tl-step { margin-top: 3.5rem; }
-    .tl-panel { grid-column: 1; }
-    .tl-text { grid-column: 3; text-align: left; padding-left: 2.5rem; }
+    /* every child pinned to row 1: grid auto-placement only moves forward,
+       so the reversed steps would otherwise drop onto rows 2 and 3 */
+    .tl-panel { grid-column: 1; grid-row: 1; }
+    .tl-node  { grid-row: 1; }
+    .tl-text  { grid-column: 3; grid-row: 1; text-align: left; padding-left: 2.5rem; }
     .tl-step:nth-child(even) .tl-panel { grid-column: 3; }
     .tl-step:nth-child(even) .tl-text { grid-column: 1; padding-left: 0; padding-right: 2.5rem; text-align: right; }
     .tl-node {
@@ -567,9 +570,9 @@
     @media (max-width: 880px) {
       .timeline::before { left: 23px; }
       .tl-step { grid-template-columns: 46px 1fr; gap: 1rem 1.25rem; }
-      .tl-node { grid-column: 1; margin: 0; }
-      .tl-text, .tl-step:nth-child(even) .tl-text { grid-column: 2; text-align: left; padding: 0; }
-      .tl-panel, .tl-step:nth-child(even) .tl-panel { grid-column: 2; margin-top: 1.25rem; }
+      .tl-node { grid-column: 1; grid-row: 1; margin: 0; }
+      .tl-text, .tl-step:nth-child(even) .tl-text { grid-column: 2; grid-row: 1; text-align: left; padding: 0; }
+      .tl-panel, .tl-step:nth-child(even) .tl-panel { grid-column: 2; grid-row: 2; margin-top: 1.25rem; }
     }
     @media (max-width: 700px) {
       .wrap, .header-inner { padding-left: 1.35rem; padding-right: 1.35rem; }
@@ -609,7 +612,7 @@
       </nav>
       <div class="header-actions">
         <a href="https://www.linkedin.com/in/trevor-crasto/" class="social-btn" target="_blank" rel="noopener" aria-label="Trevor Crasto on LinkedIn">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 21.5h5.16V9.25H2.4V21.5zM9.9 9.25h4.95v1.68h.07c.69-1.24 2.38-2.55 4.9-2.55 5.24 0 6.2 3.3 6.2 7.6v5.52h-5.16v-4.9c0-1.17-.02-2.67-1.68-2.67-1.68 0-1.94 1.28-1.94 2.6v4.97H9.9V9.25z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-3.97 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg>
         </a>
         <a href="#contact" class="btn btn-gold">Book a Call</a>
         <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
